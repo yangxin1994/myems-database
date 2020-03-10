@@ -247,36 +247,6 @@ CREATE INDEX `tbl_virtual_meters_index_2` ON  `myems_space_db`.`tbl_virtual_mete
 
 -- COMMIT;
 
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_space_db`.`tbl_offline_meters`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_space_db`.`tbl_offline_meters` ;
-
-CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_offline_meters` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `uuid` CHAR(36) NOT NULL,
-  `energy_category_id` BIGINT NOT NULL,
-  `is_counted` BOOL NOT NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_space_db`.`tbl_offline_meters`   (`name`);
-CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_space_db`.`tbl_offline_meters`   (`energy_category_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_space_db`.`tbl_offline_meters`
--- ---------------------------------------------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_space_db`;
-
--- INSERT INTO `myems_space_db`.`tbl_offline_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
--- VALUES
--- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true);
--- COMMIT;
-
-
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_space_db`.`tbl_expressions`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -334,6 +304,59 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_variables` (
 -- (3, 'z', 1, 'meter', 3);
 
 -- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_space_db`.`tbl_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_space_db`.`tbl_offline_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_offline_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `energy_category_id` BIGINT NOT NULL,
+  `is_counted` BOOL NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_space_db`.`tbl_offline_meters`   (`name`);
+CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_space_db`.`tbl_offline_meters`   (`energy_category_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_space_db`.`tbl_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_space_db`;
+
+-- INSERT INTO `myems_space_db`.`tbl_offline_meters`
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
+-- VALUES
+-- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true);
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_space_db`.`tbl_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_space_db`.`tbl_sensors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_sensors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_sensors_index_1` ON  `myems_space_db`.`tbl_sensors`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_space_db`.`tbl_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_space_db`;
+
+-- INSERT INTO `myems_space_db`.`tbl_sensors`
+-- (`id`, `name`, `uuid`)
+-- VALUES
+-- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511');
+-- COMMIT;
+
+
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_space_db`.`tbl_data_sources`
@@ -461,6 +484,27 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_meters_points` (
 -- VALUES (1, 1, 1);
 -- COMMIT;
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_space_db`.`tbl_sensors_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_space_db`.`tbl_sensors_points` ;
+
+CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_sensors_points` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `sensor_id` BIGINT NOT NULL,
+  `point_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_space_db`.`tbl_sensors_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_space_db`;
+
+-- INSERT INTO `myems_space_db`.`tbl_sensors_points`
+-- (`id`, `sensor_id`, `point_id`)
+-- VALUES (1, 1, 1);
+-- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_space_db`.`tbl_equipments_meters`
