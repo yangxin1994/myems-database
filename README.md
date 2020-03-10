@@ -1,10 +1,10 @@
-##MyEMS Database
+## MyEMS Database
 
 ### Introduction
 Providing database schema and scripts for MyEMS.
 
 
-###Prerequisites
+### Prerequisites
 MySQL 8.0 or MemSQL 7.0
 
 
