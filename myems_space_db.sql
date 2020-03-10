@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_spaces` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `company_id` BIGINT NOT NULL,
+  `parent_space_id` BIGINT,
   `timezone_id` BIGINT NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
   `ems_contact_phone` VARCHAR(32) NOT NULL,
@@ -185,6 +185,35 @@ VALUES
 (6,'蒸汽','ac91a5c4-4ae5-4a73-8e3f-044591f42eef','T',1,1),
 (7,'压缩空气','ff238e98-cd35-47c5-88a3-00617587775d','m³',1,1),
 (8,'循环水','7e159a34-b2e6-4fd3-ba76-897d134abe06','m³',1,1);
+
+COMMIT;
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_space_db`.`tbl_energy_items`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_space_db`.`tbl_energy_items` ;
+
+CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_energy_items` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `energy_category_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_energy_items_index_1` ON  `myems_space_db`.`tbl_energy_items`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_space_db`.`tbl_energy_items`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_space_db`;
+
+INSERT INTO `myems_space_db`.`tbl_energy_categories`
+(`id`, `name`, `uuid`, `energy_category_id`)
+VALUES、、
+(1, '空调用电', 'c5eac07a-e889-4a56-aa1b-a0b688c4e953', 1),
+(2, '动力用电', '6875e4e0-a2ec-47a5-a88e-becb10e9603a', 1),
+(3, '照明用电', '79918598-6477-4130-a85c-4cb87d0eac23', 1);
 
 COMMIT;
 
@@ -355,7 +384,6 @@ CREATE INDEX `tbl_sensors_index_1` ON  `myems_space_db`.`tbl_sensors`   (`name`)
 -- VALUES
 -- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511');
 -- COMMIT;
-
 
 
 -- ---------------------------------------------------------------------------------------------------------------------
