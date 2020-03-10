@@ -87,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_spaces` (
   `ems_contact_phone` VARCHAR(32) NOT NULL,
   `ems_contact_email` VARCHAR(64) NOT NULL,
   `is_counted` BOOL NOT NULL,
-  `is_equipment_status_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
   PRIMARY KEY (`id`));
@@ -691,20 +690,6 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_equipments_parameters` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `equipment_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
-  -- suspended status threshold
-  `suspended` DOUBLE NOT NULL,
-  -- idling status threshold
-  `idling` DOUBLE NOT NULL,
-  -- running status threshold
-  `running` DOUBLE NOT NULL,
-  -- normal energy consumption threshold on non-working day
-  `repair` DOUBLE NOT NULL,
-  -- warning percentage threshold of energy consumption on non-working day
-  -- to energy consumption on avegrage working day
-  `warning` DOUBLE NOT NULL,
-   -- maintenance energy consumption threshold on non-working day,
-   -- this value does not include normal energy consumption
-  `maintenance` DOUBLE NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_parameters_index_1` ON  `myems_space_db`.`tbl_equipments_parameters`   (`equipment_id`);
 
