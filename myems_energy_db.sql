@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_meter_hourly` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `meter_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_meter_hourly_index_1` ON  `myems_energy_db`.`tbl_meter_hourly`   (`meter_id`, `start_datetime_utc`);
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_virtual_meter_hourly` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `virtual_meter_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_virtual_meter_hourly_index_1` ON  `myems_energy_db`.`tbl_virtual_meter_hourly`   (`virtual_meter_id`, `start_datetime_utc`);
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_offline_meter_hourly` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `offline_meter_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meter_hourly_index_1` ON  `myems_energy_db`.`tbl_offline_meter_hourly`   (`offline_meter_id`, `start_datetime_utc`);
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_equipment_hourly` (
   `equipment_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipment_hourly_index_1` ON  `myems_energy_db`.`tbl_equipment_hourly`   (`equipment_id`, `energy_category_id`, `start_datetime_utc`);
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_space_hourly` (
   `space_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_space_hourly_index_1` ON  `myems_energy_db`.`tbl_space_hourly`   (`space_id`, `energy_category_id`, `start_datetime_utc`);
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_equipment_output_hourly` (
   `equipment_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipment_output_hourly_index_1` ON  `myems_energy_db`.`tbl_equipment_output_hourly`   (`equipment_id`, `energy_category_id`, `start_datetime_utc`);
 
@@ -106,6 +106,6 @@ CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_space_output_hourly` (
   `space_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DOUBLE NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_space_output_hourly_index_1` ON  `myems_energy_db`.`tbl_space_output_hourly`   (`space_id`, `energy_category_id`, `start_datetime_utc`);
