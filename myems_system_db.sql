@@ -1216,7 +1216,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `uuid` CHAR(36) NOT NULL,
   `location` VARCHAR(128) NOT NULL,
   `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
-  `parent_space_id` BIGINT,
+  `parent_space_id` BIGINT NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
