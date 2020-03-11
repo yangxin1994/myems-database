@@ -826,6 +826,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `parent_space_id` BIGINT,
+  `area_in_square_meters` DOUBLE NOT NULL,
   `timezone_id` BIGINT NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
   `ems_contact_phone` VARCHAR(32) NOT NULL,
@@ -1202,6 +1203,100 @@ VALUES
 (4, 15, 100000, 1000000000, 0.678);
 
 COMMIT;
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenants`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `location` VARCHAR(128) NOT NULL,
+  `area_in_square_meters` DOUBLE NOT NULL,
+  `parent_space_id` BIGINT,
+  `lease_start_datetime_utc` DATETIME NOT NULL,
+  `lease_end_datetime_utc` DATETIME NOT NULL,
+  `ems_contact_name` VARCHAR(32) NOT NULL,
+  `ems_contact_phone` VARCHAR(32) NOT NULL,
+  `ems_contact_email` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
+CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenants_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `tenant_id` BIGINT NOT NULL,
+  `meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenants_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_tenants_meters`
+-- (`id`, `tenant_id`, `meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenants_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants_offline_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants_offline_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `tenant_id` BIGINT NOT NULL,
+  `offline_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenants_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_tenants_offline_meters`
+-- (`id`, `tenant_id`, `offline_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenants_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants_virtual_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants_virtual_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `tenant_id` BIGINT NOT NULL,
+  `virtual_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenants_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_tenants_virtual_meters`
+-- (`id`, `tenant_id`, `virtual_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_timezones`
