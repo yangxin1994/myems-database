@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_cost_centers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `external_id` VARCHAR(36), --ID in external syste, such as SAP, ERP
+  `external_id` VARCHAR(36) COMMENT 'ID in external syste, such as SAP, ERP',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_cost_centers_index_1` ON  `myems_space_db`.`tbl_cost_centers`   (`name`);
 
@@ -87,12 +87,11 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_spaces` (
   `ems_contact_phone` VARCHAR(32) NOT NULL,
   `ems_contact_email` VARCHAR(64) NOT NULL,
   `is_counted` BOOL NOT NULL,
-  `is_equipment_status_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
   PRIMARY KEY (`id`));
-CREATE INDEX `tbl_factories_index_1` ON  `myems_space_db`.`tbl_factories`   (`name`);
-CREATE INDEX `tbl_factories_index_2` ON  `myems_space_db`.`tbl_factories`   (`company_id`);
+CREATE INDEX `tbl_spaces_index_1` ON  `myems_space_db`.`tbl_spaces`   (`name`);
+CREATE INDEX `tbl_spaces_index_2` ON  `myems_space_db`.`tbl_spaces`   (`parent_space_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_space_db`.`tbl_equipments`
@@ -208,9 +207,9 @@ CREATE INDEX `tbl_energy_items_index_1` ON  `myems_space_db`.`tbl_energy_items` 
 START TRANSACTION;
 USE `myems_space_db`;
 
-INSERT INTO `myems_space_db`.`tbl_energy_categories`
+INSERT INTO `myems_space_db`.`tbl_energy_items`
 (`id`, `name`, `uuid`, `energy_category_id`)
-VALUES、、
+VALUES
 (1, '空调用电', 'c5eac07a-e889-4a56-aa1b-a0b688c4e953', 1),
 (2, '动力用电', '6875e4e0-a2ec-47a5-a88e-becb10e9603a', 1),
 (3, '照明用电', '79918598-6477-4130-a85c-4cb87d0eac23', 1);
@@ -691,20 +690,6 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_equipments_parameters` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `equipment_id` BIGINT NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
-  -- suspended status threshold
-  `suspended` DOUBLE NOT NULL,
-  -- idling status threshold
-  `idling` DOUBLE NOT NULL,
-  -- running status threshold
-  `running` DOUBLE NOT NULL,
-  -- normal energy consumption threshold on non-working day
-  `repair` DOUBLE NOT NULL,
-  -- warning percentage threshold of energy consumption on non-working day
-  -- to energy consumption on avegrage working day
-  `warning` DOUBLE NOT NULL,
-   -- maintenance energy consumption threshold on non-working day,
-   -- this value does not include normal energy consumption
-  `maintenance` DOUBLE NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_parameters_index_1` ON  `myems_space_db`.`tbl_equipments_parameters`   (`equipment_id`);
 
@@ -1057,7 +1042,7 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_process_heat_pumps` (
 CREATE INDEX `tbl_process_heat_pumps_index_1` ON  `myems_space_db`.`tbl_process_heat_pumps`   (`equipment_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_space_db`.`tbl_factories_weather_points`
+-- Table `myems_space_db`.`tbl_spaces_weather_points`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_space_db`.`tbl_spaces_weather_points` ;
 
@@ -1066,7 +1051,7 @@ CREATE TABLE IF NOT EXISTS `myems_space_db`.`tbl_spaces_weather_points` (
   `space_id` BIGINT NOT NULL,
   `point_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`));
-CREATE INDEX `tbl_factories_weather_points_index_1` ON  `myems_space_db`.`tbl_spaces_weather_points`   (`space_id`);
+CREATE INDEX `tbl_spaces_weather_points_index_1` ON  `myems_space_db`.`tbl_spaces_weather_points`   (`space_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_space_db`.`tbl_spaces_weather_points`
