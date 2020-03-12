@@ -35,7 +35,7 @@ collation-server = utf8mb4_unicode_ci
 #### myems_system_db
 [tbl_cost_centers](#tbl_cost_centers) | [tbl_data_sources](#tbl_data_sources)
 
-#### tbl_cost_centers
+##### tbl_cost_centers
 
 | Name      | Type     | Length     | Allow Null | Description
 | :---          |    :----:   |  :----:       |  :----:       |     :---         |
@@ -45,7 +45,7 @@ collation-server = utf8mb4_unicode_ci
 | external_id   | VARCHAR | 36 |    NULL | 外部系统中的ID或标记，如SAP等ERP系统
 
 
-#### tbl_data_sources
+##### tbl_data_sources
 
 | Name      | Type     | Length     | Allow Null | Description
 | :---          |    :----:   |  :----:       |  :----:       |     :---         |
@@ -55,3 +55,16 @@ collation-server = utf8mb4_unicode_ci
 | protocol   | VARCHAR | 16        | NOT NULL | 通讯协议 ('modbus-tcp', 'modbus-tru', 'bacnet-ip', 's7', 'opc-ua', 'control-logix' )
 | connection   | JSON |   |  NOT NULL | 通讯地址 JSON格式
 | last_seen_datetime_utc   | DATETIME |   |  NOT NULL | 最后一次上线时间(UTC)
+
+
+#### myems_historical_db
+
+#### myems_energy_db
+
+#### myems_billing_db
+
+#### myems_user_db
+
+#### myems_fdd_db
+
+#### myems_reporting_db

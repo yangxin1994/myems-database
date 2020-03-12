@@ -91,7 +91,35 @@ CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_space_hourly` (
   `start_datetime_utc` DATETIME NOT NULL,
   `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
-CREATE INDEX `tbl_space_hourly_index_1` ON  `myems_billing_db`.`tbl_space_hourly`   (`company_id`, `energy_category_id`, `start_datetime_utc`);
+CREATE INDEX `tbl_space_hourly_index_1` ON  `myems_billing_db`.`tbl_space_hourly`   (`space_id`, `energy_category_id`, `start_datetime_utc`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_billing_db`.`tbl_space_output_hourly`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_billing_db`.`tbl_space_output_hourly` ;
+
+CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_space_output_hourly` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `energy_category_id` BIGINT NOT NULL,
+  `start_datetime_utc` DATETIME NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_space_output_hourly_index_1` ON  `myems_billing_db`.`tbl_space_output_hourly`   (`space_id`, `energy_category_id`, `start_datetime_utc`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_billing_db`.`tbl_tenant_hourly`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_billing_db`.`tbl_tenant_hourly` ;
+
+CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_tenant_hourly` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `tenant_id` BIGINT NOT NULL,
+  `energy_category_id` BIGINT NOT NULL,
+  `start_datetime_utc` DATETIME NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_tenant_hourly_index_1` ON  `myems_billing_db`.`tbl_tenant_hourly`   (`tenant_id`, `energy_category_id`, `start_datetime_utc`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_billing_db`.`tbl_virtual_meter_hourly`
