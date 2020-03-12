@@ -40,19 +40,19 @@ collation-server = utf8mb4_unicode_ci
 
 | Name      | Type     | Length     | Allow Null | Description
 | :---          |    :----:   |  :----:       |  :----:       |     :---         |
-| id            |   BIGINT    |             | - [ ] Null - [x] Not Null | Identity
-| name      | VARCHAR |     128    | - [ ] Null - [x] Not Null   | Name
-| uuid       | CHAR         | 36          | - [ ] Null - [x] Not Null  | UUID
-| external_id   | VARCHAR | 36 |   - [x] Null - [ ] Not Null | 外部系统中的ID或标记，如SAP等ERP系统
+| id            |   BIGINT    |             | NOT NULL | Identity
+| name      | VARCHAR |     128    | NOT NULL   | Name
+| uuid       | CHAR         | 36          | NOT NULL  | UUID
+| external_id   | VARCHAR | 36 |    NULL | 外部系统中的ID或标记，如SAP等ERP系统
 
 
 #### tbl_data_sources
 
-| Name      | Type     | Length     | Not Null | Description
+| Name      | Type     | Length     | Allow Null | Description
 | :---          |    :----:   |  :----:       |  :----:       |     :---         |
-| id            |   BIGINT    |              | - [ ] Null - [x] Not Null | Identity
-| name      | VARCHAR |     128    | - [ ] Null - [x] Not Null | Name
-| uuid       | CHAR         | 36          | - [ ] Null - [x] Not Null | UUID
-| protocol   | VARCHAR | 16        | - [ ] Null - [x] Not Null | 通讯协议 ('modbus-tcp', 'modbus-tru', 'bacnet-ip', 's7', 'opc-ua', 'control-logix' )
-| connection   | JSON |   |  - [ ] Null - [x] Not Null | 通讯地址 JSON格式
-| last_seen_datetime_utc   | DATETIME |   |  - [ ] Null - [x] Not Null | 最后一次上线时间
+| id            |   BIGINT    |              | NOT NULL | Identity
+| name      | VARCHAR |     128    | NOT NULL | Name
+| uuid       | CHAR         | 36          | NOT NULL | UUID
+| protocol   | VARCHAR | 16        | NOT NULL | 通讯协议 ('modbus-tcp', 'modbus-tru', 'bacnet-ip', 's7', 'opc-ua', 'control-logix' )
+| connection   | JSON |   |  NOT NULL | 通讯地址 JSON格式
+| last_seen_datetime_utc   | DATETIME |   |  NOT NULL | 最后一次上线时间(UTC)
