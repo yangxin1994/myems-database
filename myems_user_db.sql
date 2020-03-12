@@ -3,14 +3,7 @@
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Schema myems_user_db
 -- ---------------------------------------------------------------------------------------------------------------------
--- MyEMS User Database
 DROP DATABASE IF EXISTS `myems_user_db` ;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Database myems_user_db
---
--- MyEMS User Database
--- ---------------------------------------------------------------------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS `myems_user_db` ;
 USE `myems_user_db` ;
 
@@ -65,5 +58,3 @@ CREATE TABLE IF NOT EXISTS `myems_user_db`.`tbl_logs` (
   `utc_date_time` DATETIME NOT NULL,
   `activity` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`id`));
-
-COMMIT;

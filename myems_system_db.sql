@@ -1497,3 +1497,26 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_water_boilers` (
   `cumulative_heating_meter_uuid` CHAR(36)   NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_water_boilers_index_1` ON  `myems_system_db`.`tbl_water_boilers`   (`equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_versions`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_versions` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_versions` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `version` VARCHAR(256) NOT NULL,
+  `release_date` DATE NOT NULL,
+  PRIMARY KEY (`id`));
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_versions`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_versions`
+(`id`, `version`, `release_date`)
+VALUES
+(1, '1.0.0', '2020-03-12');
+
+COMMIT;
