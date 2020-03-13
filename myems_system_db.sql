@@ -1247,14 +1247,14 @@ INSERT INTO `myems_system_db`.`tbl_tenant_types`
 (`id`, `name`, `description`, `simplified_code`)
 VALUES
 (1, 'Office', '办公', 'OF'),
-(1, 'Retail', '零售', 'RT'),
-(1, 'Carpark', '停车场', 'CA'),
-(1, 'Hotel', '酒店', 'HT'),
-(1, 'Residential', '住宅', 'RS'),
-(1, 'Service Apartment', '服务式公寓', 'SA'),
-(1, 'Development (Complex)', '整个物业项目', 'DV'),
-(1, 'Plant 1', '能源站 1', 'P1'),
-(1, 'Plant 2', '能源站 2', 'P2');
+(2, 'Retail', '零售', 'RT'),
+(3, 'Carpark', '停车场', 'CA'),
+(4, 'Hotel', '酒店', 'HT'),
+(5, 'Residential', '住宅', 'RS'),
+(6, 'Service Apartment', '服务式公寓', 'SA'),
+(7, 'Development (Complex)', '整个物业项目', 'DV'),
+(8, 'Plant 1', '能源站 1', 'P1'),
+(9, 'Plant 2', '能源站 2', 'P2');
 
 COMMIT;
 
