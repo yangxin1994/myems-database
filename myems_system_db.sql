@@ -1202,7 +1202,6 @@ VALUES
 
 COMMIT;
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenants`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1215,6 +1214,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `location` VARCHAR(128) NOT NULL,
   `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
   `parent_space_id` BIGINT NOT NULL,
+  `type_id` BIGINT NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
@@ -1223,6 +1223,40 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
 CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenant_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenant_types` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenant_types` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `description` VARCHAR(128) NOT NULL,
+  `simplified_code` VARCHAR(128) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_tenant_types_index_1` ON  `myems_system_db`.`tbl_tenant_types`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenant_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_tenant_types`
+(`id`, `name`, `description`, `simplified_code`)
+VALUES
+(1, 'Office', '办公', 'OF'),
+(1, 'Retail', '零售', 'RT'),
+(1, 'Carpark', '停车场', 'CA'),
+(1, 'Hotel', '酒店', 'HT'),
+(1, 'Residential', '住宅', 'RS'),
+(1, 'Service Apartment', '服务式公寓', 'SA'),
+(1, 'Development (Complex)', '整个物业项目', 'DV'),
+(1, 'Plant 1', '能源站 1', 'P1'),
+(1, 'Plant 2', '能源站 2', 'P2');
+
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenants_meters`
