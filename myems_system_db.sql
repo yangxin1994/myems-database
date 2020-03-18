@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `maintainer` VARCHAR(128) NOT NULL,
   `use_life_start` DATE NOT NULL,
   `use_life_end` DATE NOT NULL,
-  `is_main` BOOL NOT NULL,
+  `is_key_equipment` BOOL NOT NULL,
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `location` VARCHAR(128) NULL,
@@ -392,7 +392,7 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
--- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_main`, `is_counted`, `is_output_counted`)
+-- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`)
 -- VALUES
 -- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false),
 -- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false);
@@ -1220,12 +1220,17 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `location` VARCHAR(128) NOT NULL,
-  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
   `parent_space_id` BIGINT NOT NULL,
-  `type_id` BIGINT NOT NULL,
+  `buildings` VARCHAR(128) NOT NULL,
+  `floors` VARCHAR(128) NOT NULL,
+  `rooms` VARCHAR(128) NOT NULL,
+  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
+  `tenant_type_id` BIGINT NOT NULL,
+  `is_key_tenant` BOOL NOT NULL,
+  `lease_number` VARCHAR(128) NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
+  `is_in_lease` BOOL NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
   `ems_contact_phone` VARCHAR(32) NOT NULL,
   `ems_contact_email` VARCHAR(64) NOT NULL,
