@@ -376,9 +376,11 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `maintainer` VARCHAR(128) NOT NULL,
   `use_life_start` DATE NOT NULL,
   `use_life_end` DATE NOT NULL,
-  `is_main` BOOL NOT NULL,
+  `is_key_equipment` BOOL NOT NULL,
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
+  `location` VARCHAR(128) NULL,
+  `description` VARCHAR(128) NULL,
   `advanced_type` VARCHAR(128)  NULL COMMENT 'NULL, heat_pump, ground_source_heat_pump, high_temperature_heat_pump, process_heat_pump, steam_boiler, water_boiler, air_compressor, air_handling_unit, cooling_water_pump, chilled_water_pump, cooling_tower, chiller',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (`name`);
@@ -390,7 +392,7 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
--- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_main`, `is_counted`, `is_output_counted`)
+-- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`)
 -- VALUES
 -- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false),
 -- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false);
@@ -611,6 +613,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `location` VARCHAR(128) NULL,
+  `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_meters_index_1` ON  `myems_system_db`.`tbl_meters`   (`name`);
 CREATE INDEX `tbl_meters_index_2` ON  `myems_system_db`.`tbl_meters`   (`energy_category_id`);
@@ -662,6 +666,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_offline_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_system_db`.`tbl_offline_meters`   (`name`);
 CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_system_db`.`tbl_offline_meters`   (`energy_category_id`);
@@ -779,6 +784,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_sensors` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
+  `location` VARCHAR(128) NULL,
+  `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_sensors_index_1` ON  `myems_system_db`.`tbl_sensors`   (`name`);
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -832,6 +839,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
+  `location` VARCHAR(128) NULL,
+  `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_spaces`   (`name`);
 CREATE INDEX `tbl_spaces_index_2` ON  `myems_system_db`.`tbl_spaces`   (`parent_space_id`);
@@ -1202,7 +1211,6 @@ VALUES
 
 COMMIT;
 
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenants`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1212,17 +1220,57 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `location` VARCHAR(128) NOT NULL,
-  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
   `parent_space_id` BIGINT NOT NULL,
+  `buildings` VARCHAR(128) NOT NULL,
+  `floors` VARCHAR(128) NOT NULL,
+  `rooms` VARCHAR(128) NOT NULL,
+  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
+  `tenant_type_id` BIGINT NOT NULL,
+  `is_key_tenant` BOOL NOT NULL,
+  `lease_number` VARCHAR(128) NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
+  `is_in_lease` BOOL NOT NULL,
   `ems_contact_name` VARCHAR(32) NOT NULL,
   `ems_contact_phone` VARCHAR(32) NOT NULL,
   `ems_contact_email` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
 CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenant_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenant_types` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenant_types` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `description` VARCHAR(128) NOT NULL,
+  `simplified_code` VARCHAR(128) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_tenant_types_index_1` ON  `myems_system_db`.`tbl_tenant_types`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenant_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_tenant_types`
+(`id`, `name`, `description`, `simplified_code`)
+VALUES
+(1, 'Office', '办公', 'OF'),
+(2, 'Retail', '零售', 'RT'),
+(3, 'Carpark', '停车场', 'CA'),
+(4, 'Hotel', '酒店', 'HT'),
+(5, 'Residential', '住宅', 'RS'),
+(6, 'Service Apartment', '服务式公寓', 'SA'),
+(7, 'Development (Complex)', '整个物业项目', 'DV'),
+(8, 'Plant 1', '能源站 1', 'P1'),
+(9, 'Plant 2', '能源站 2', 'P2');
+
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenants_meters`
@@ -1423,6 +1471,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_virtual_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_virtual_meters_index_1` ON  `myems_system_db`.`tbl_virtual_meters`   (`name`);
 CREATE INDEX `tbl_virtual_meters_index_2` ON  `myems_system_db`.`tbl_virtual_meters`   (`energy_category_id`);
