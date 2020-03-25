@@ -186,6 +186,18 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_cooling_water_pumps` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_cooling_water_pumps_index_1` ON  `myems_system_db`.`tbl_cooling_water_pumps`   (`equipment_id`);
 
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_cost_centers`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_cost_centers` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_cost_centers` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `external_id` VARCHAR(36) COMMENT 'ID in external syste, such as SAP, ERP',
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_cost_centers_index_1` ON  `myems_system_db`.`tbl_cost_centers`   (`name`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_cost_centers`
@@ -199,47 +211,6 @@ CREATE INDEX `tbl_cooling_water_pumps_index_1` ON  `myems_system_db`.`tbl_coolin
 -- (1, '成本中心1', 'd97b9736-c4f9-4005-a534-6af3487303ad', NULL);
 -- (2, '成本中心2', 'aa9b4e27-df2c-4b39-9e87-cba3e1f0ab26', '1010248003');
 -- COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_companies`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_companies` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_companies` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `uuid` CHAR(36) NOT NULL,
-  `timezone_id` BIGINT NOT NULL,
-  `ems_contact_name` VARCHAR(32) NOT NULL,
-  `ems_contact_phone` VARCHAR(32) NOT NULL,
-  `ems_contact_email` VARCHAR(64) NOT NULL,
-  `cost_center_id` BIGINT,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_companies_index_1` ON  `myems_system_db`.`tbl_companies`   (`name`);
--- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_system_db`.`tbl_companies`
--- ---------------------------------------------------------------------------------------------------------------------
-START TRANSACTION;
-USE `myems_system_db`;
-INSERT INTO `myems_system_db`.`tbl_companies`
-(`id`, `name`, `uuid`, `timezone_id`, `ems_contact_name`, `ems_contact_phone`, `ems_contact_email`, `cost_center_id`)
-VALUES
-(1, 'Beijing Company', '7f08895f-f6d0-482a-82d9-e32fb3abb1e2', 56, 'Mr. Johnson', '13888888888', 'ems@example.com', NULL);
-
-COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_cost_centers`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_cost_centers` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_cost_centers` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `uuid` CHAR(36) NOT NULL,
-  `external_id` VARCHAR(36) COMMENT 'ID in external syste, such as SAP, ERP',
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_cost_centers_index_1` ON  `myems_system_db`.`tbl_cost_centers`   (`name`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_cost_centers_tariffs`
