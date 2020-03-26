@@ -584,6 +584,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
+  `energy_item_id` BIGINT NULL,
   `location` VARCHAR(128) NULL,
   `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
