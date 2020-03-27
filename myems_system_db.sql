@@ -147,11 +147,20 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_contacts` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `display_name` VARCHAR(128) NOT NULL,
   `email` VARCHAR(128) NOT NULL,
   `phone` VARCHAR(128) NOT NULL,
   `description` VARCHAR(128)  NULL ,
   PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_contacts`
+-- ---------------------------------------------------------------------------------------------------------------------
+  START TRANSACTION;
+  USE `myems_system_db`;
+  INSERT INTO `myems_system_db`.`tbl_contacts`(`id`, `name`, `uuid`, `email`, `phone`, `description`)
+  VALUES
+  (1, 'John', '5c5ce6e8-8d00-46b3-9602-4e1520a8b43f',  'john@myems.io', '+8613888888888', 'Building #1');
+  COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_cooling_towers`
@@ -836,6 +845,20 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_spaces`   (`name`);
 CREATE INDEX `tbl_spaces_index_2` ON  `myems_system_db`.`tbl_spaces`   (`parent_space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_spaces`
+(`id`, `name`, `uuid`, `parent_space_id`, `area_in_square_meters`, `timezone_id`, `contact_id`, `is_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+VALUES
+    (1, 'MyEMS Headquarter', '9dfb7cff-f19f-4a1e-8c79-3adf6425bfd9', NULL, 99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
+    (2, 'MyEMS Building #1', '8f25b33b-db93-49b3-b0f8-b01e0c19df29', 1, 88888.888, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
+    (3, 'MyEMS Building #2', '195d7ea8-17b4-4e9c-bb37-546428155438', 1, 66666.666, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project');
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces_equipments`
