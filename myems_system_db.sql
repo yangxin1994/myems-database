@@ -591,6 +591,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_meters_index_1` ON  `myems_system_db`.`tbl_meters`   (`name`);
 CREATE INDEX `tbl_meters_index_2` ON  `myems_system_db`.`tbl_meters`   (`energy_category_id`);
+CREATE INDEX `tbl_meters_index_3` ON  `myems_system_db`.`tbl_meters`   (`energy_item_id`);
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_meters`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -600,9 +601,9 @@ CREATE INDEX `tbl_meters_index_2` ON  `myems_system_db`.`tbl_meters`   (`energy_
 -- INSERT INTO `myems_system_db`.`tbl_meters`
 -- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
 -- VALUES
--- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true),
--- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true),
--- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true);
+-- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 'floor1', 'meter1'),
+-- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 'floor2', 'meter2'),
+-- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 'floor2', 'meter3');
 
 -- COMMIT;
 
@@ -639,10 +640,14 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_offline_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
+  `energy_item_id` BIGINT NULL,
+  `location` VARCHAR(128) NULL,
   `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_system_db`.`tbl_offline_meters`   (`name`);
 CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_system_db`.`tbl_offline_meters`   (`energy_category_id`);
+CREATE INDEX `tbl_offline_meters_index_3` ON  `myems_system_db`.`tbl_offline_meters`   (`energy_item_id`);
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_offline_meters`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -650,9 +655,9 @@ CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_system_db`.`tbl_offline_met
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_offline_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `energy_item_id`, `location`, `description`)
 -- VALUES
--- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true);
+-- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true, 999.99, 1, 'floor1', 'offlinemeter1');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1444,10 +1449,13 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_virtual_meters` (
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
+  `energy_item_id` BIGINT NULL,
+  `location` VARCHAR(128) NULL,
   `description` VARCHAR(128) NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_virtual_meters_index_1` ON  `myems_system_db`.`tbl_virtual_meters`   (`name`);
 CREATE INDEX `tbl_virtual_meters_index_2` ON  `myems_system_db`.`tbl_virtual_meters`   (`energy_category_id`);
+CREATE INDEX `tbl_virtual_meters_index_3` ON  `myems_system_db`.`tbl_virtual_meters`   (`energy_item_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_virtual_meters`
@@ -1456,9 +1464,9 @@ CREATE INDEX `tbl_virtual_meters_index_2` ON  `myems_system_db`.`tbl_virtual_met
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_virtual_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `energy_item_id`, `location`, `description`)
 -- VALUES
--- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true);
+-- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true, 1, 'virtual location', `virtual description`);
 
 -- COMMIT;
 
@@ -1471,7 +1479,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_variables` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` CHAR(36) NOT NULL,
   `expression_id` BIGINT NOT NULL,
-  `meter_type` VARCHAR(32) NOT NULL,
+  `meter_type` VARCHAR(32) NOT NULL COMMENT 'meter, virtual_meter, offline_meter',
   `meter_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`));
   CREATE INDEX `tbl_variables_index_1` ON  `myems_system_db`.`tbl_variables`   (`expression_id`);
