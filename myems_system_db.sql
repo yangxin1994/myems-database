@@ -137,6 +137,22 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_chillers` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_chillers_index_1` ON  `myems_system_db`.`tbl_chillers`   (`equipment_id`);
 
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_contacts`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_contacts` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_contacts` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `display_name` VARCHAR(128) NOT NULL,
+  `email` VARCHAR(128) NOT NULL,
+  `phone` VARCHAR(128) NOT NULL,
+  `description` VARCHAR(128)  NULL ,
+  PRIMARY KEY (`id`));
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_cooling_towers`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -811,14 +827,12 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `parent_space_id` BIGINT,
   `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
   `timezone_id` BIGINT NOT NULL,
-  `ems_contact_name` VARCHAR(32) NOT NULL,
-  `ems_contact_phone` VARCHAR(32) NOT NULL,
-  `ems_contact_email` VARCHAR(64) NOT NULL,
+  `contact_id` BIGINT,
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
+  `location` VARCHAR(128),
+  `description` VARCHAR(128),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_spaces`   (`name`);
 CREATE INDEX `tbl_spaces_index_2` ON  `myems_system_db`.`tbl_spaces`   (`parent_space_id`);
@@ -1209,9 +1223,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
   `is_in_lease` BOOL NOT NULL,
-  `ems_contact_name` VARCHAR(32) NOT NULL,
-  `ems_contact_phone` VARCHAR(32) NOT NULL,
-  `ems_contact_email` VARCHAR(64) NOT NULL,
+  `contact_id` BIGINT,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
 CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
