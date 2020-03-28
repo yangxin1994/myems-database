@@ -391,8 +391,8 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
 -- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`)
 -- VALUES
--- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false),
--- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false);
+-- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false, 1, 'location', 'description', 'NULL'),
+-- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false, 1, 'location', 'description', 'NULL');
 
 -- COMMIT;
 
@@ -629,9 +629,9 @@ CREATE INDEX `tbl_meters_index_3` ON  `myems_system_db`.`tbl_meters`   (`energy_
 -- INSERT INTO `myems_system_db`.`tbl_meters`
 -- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`)
 -- VALUES
--- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 'floor1', 'meter1'),
--- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 'floor2', 'meter2'),
--- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 'floor2', 'meter3');
+-- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor1', 'meter1'),
+-- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor2', 'meter2'),
+-- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 1, 'floor2', 'meter3');
 
 -- COMMIT;
 
@@ -686,7 +686,7 @@ CREATE INDEX `tbl_offline_meters_index_3` ON  `myems_system_db`.`tbl_offline_met
 -- INSERT INTO `myems_system_db`.`tbl_offline_meters`
 -- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `energy_item_id`, `location`, `description`)
 -- VALUES
--- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true, 999.99, 1, 'floor1', 'offlinemeter1');
+-- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true, 999.99, 1, 1, 'floor1', 'offlinemeter1');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1507,7 +1507,7 @@ CREATE INDEX `tbl_virtual_meters_index_3` ON  `myems_system_db`.`tbl_virtual_met
 -- INSERT INTO `myems_system_db`.`tbl_virtual_meters`
 -- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `energy_item_id`, `location`, `description`)
 -- VALUES
--- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true, 1, 'virtual location', `virtual description`);
+-- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true, 1, 1, 'virtual location', `virtual description`);
 
 -- COMMIT;
 
