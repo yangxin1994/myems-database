@@ -365,19 +365,20 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipments` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `serial_number` VARCHAR(128) NOT NULL,
-  `manufacturer` VARCHAR(128) NOT NULL,
-  `maintainer` VARCHAR(128) NOT NULL,
+  `serial_number` VARCHAR(255) NOT NULL,
+  `manufacturer` VARCHAR(255) NOT NULL,
+  `maintainer` VARCHAR(255) NOT NULL,
   `use_life_start` DATE NOT NULL,
   `use_life_end` DATE NOT NULL,
   `is_key_equipment` BOOL NOT NULL,
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
-  `advanced_type` VARCHAR(128)  NULL COMMENT 'NULL, heat_pump, ground_source_heat_pump, high_temperature_heat_pump, process_heat_pump, steam_boiler, water_boiler, air_compressor, air_handling_unit, cooling_water_pump, chilled_water_pump, cooling_tower, chiller',
+  `cost_center_id` BIGINT,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
+  `advanced_type` VARCHAR(255) COMMENT 'NULL, heat_pump, ground_source_heat_pump, high_temperature_heat_pump, process_heat_pump, steam_boiler, water_boiler, air_compressor, air_handling_unit, cooling_water_pump, chilled_water_pump, cooling_tower, chiller',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (`name`);
 
@@ -394,6 +395,7 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false);
 
 -- COMMIT;
+
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_equipments_meters`
@@ -605,14 +607,15 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_meters` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
   `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
-  `energy_item_id` BIGINT NULL,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
+  `energy_item_id` BIGINT,
+  `cost_center_id` BIGINT,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_meters_index_1` ON  `myems_system_db`.`tbl_meters`   (`name`);
 CREATE INDEX `tbl_meters_index_2` ON  `myems_system_db`.`tbl_meters`   (`energy_category_id`);
@@ -661,14 +664,15 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_offline_meters` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_offline_meters` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
   `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
-  `energy_item_id` BIGINT NULL,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
+  `energy_item_id` BIGINT,
+  `cost_center_id` BIGINT,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_system_db`.`tbl_offline_meters`   (`name`);
 CREATE INDEX `tbl_offline_meters_index_2` ON  `myems_system_db`.`tbl_offline_meters`   (`energy_category_id`);
@@ -831,7 +835,7 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `parent_space_id` BIGINT,
   `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
@@ -840,8 +844,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `is_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
-  `location` VARCHAR(128),
-  `description` VARCHAR(128),
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_spaces`   (`name`);
 CREATE INDEX `tbl_spaces_index_2` ON  `myems_system_db`.`tbl_spaces`   (`parent_space_id`);
@@ -1233,20 +1237,21 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `parent_space_id` BIGINT NOT NULL,
-  `buildings` VARCHAR(128) NOT NULL,
-  `floors` VARCHAR(128) NOT NULL,
-  `rooms` VARCHAR(128) NOT NULL,
+  `buildings` VARCHAR(255) NOT NULL,
+  `floors` VARCHAR(255) NOT NULL,
+  `rooms` VARCHAR(255) NOT NULL,
   `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
   `tenant_type_id` BIGINT NOT NULL,
   `is_key_tenant` BOOL NOT NULL,
-  `lease_number` VARCHAR(128) NOT NULL,
+  `lease_number` VARCHAR(255) NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
   `is_in_lease` BOOL NOT NULL,
   `contact_id` BIGINT,
+  `cost_center_id` BIGINT,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
 CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
@@ -1480,13 +1485,14 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_virtual_meters` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_virtual_meters` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `energy_category_id` BIGINT NOT NULL,
   `is_counted` BOOL NOT NULL,
   `energy_item_id` BIGINT NULL,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
+  `cost_center_id` BIGINT,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_virtual_meters_index_1` ON  `myems_system_db`.`tbl_virtual_meters`   (`name`);
 CREATE INDEX `tbl_virtual_meters_index_2` ON  `myems_system_db`.`tbl_virtual_meters`   (`energy_category_id`);
