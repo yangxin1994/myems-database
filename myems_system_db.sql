@@ -937,6 +937,30 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_offline_meters` (
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_spaces_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_sensors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_sensors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `sensor_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_spaces_sensors`
+-- (`id`, `space_id`, `sensor_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces_virtual_meters`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_virtual_meters` ;
@@ -1333,6 +1357,30 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants_offline_meters` (
 
 -- INSERT INTO `myems_system_db`.`tbl_tenants_offline_meters`
 -- (`id`, `tenant_id`, `offline_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_tenants_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenants_sensors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants_sensors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `tenant_id` BIGINT NOT NULL,
+  `sensor_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenants_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_tenants_sensors`
+-- (`id`, `tenant_id`, `sensor_id`)
 -- VALUES
 -- (1, 1, 1);
 
