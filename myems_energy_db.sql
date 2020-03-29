@@ -8,20 +8,6 @@ CREATE DATABASE IF NOT EXISTS `myems_energy_db` ;
 USE `myems_energy_db` ;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_energy_db`.`tbl_company_hourly`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_energy_db`.`tbl_company_hourly` ;
-
-CREATE TABLE IF NOT EXISTS `myems_energy_db`.`tbl_company_hourly` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `company_id` BIGINT NOT NULL,
-  `energy_category_id` BIGINT NOT NULL,
-  `start_datetime_utc` DATETIME NOT NULL,
-  `actual_value` DECIMAL(18, 3) NOT NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_company_hourly_index_1` ON  `myems_energy_db`.`tbl_company_hourly`   (`company_id`, `energy_category_id`, `start_datetime_utc`);
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_energy_db`.`tbl_equipment_hourly`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_energy_db`.`tbl_equipment_hourly` ;
