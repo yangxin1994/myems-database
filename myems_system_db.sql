@@ -145,11 +145,11 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_contacts` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_contacts` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `email` VARCHAR(128) NOT NULL,
-  `phone` VARCHAR(128) NOT NULL,
-  `description` VARCHAR(128)  NULL ,
+  `email` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(255) ,
   PRIMARY KEY (`id`));
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -789,10 +789,10 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_sensors` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_sensors` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `location` VARCHAR(128) NULL,
-  `description` VARCHAR(128) NULL,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_sensors_index_1` ON  `myems_system_db`.`tbl_sensors`   (`name`);
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -802,9 +802,9 @@ CREATE INDEX `tbl_sensors_index_1` ON  `myems_system_db`.`tbl_sensors`   (`name`
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_sensors`
--- (`id`, `name`, `uuid`)
+-- (`id`, `name`, `uuid`, `location`, `description`)
 -- VALUES
--- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511');
+-- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511', 'sensor location', 'sensor description');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
