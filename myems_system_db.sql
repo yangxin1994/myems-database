@@ -857,7 +857,7 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_spaces`
-(`id`, `name`, `uuid`, `parent_space_id`, `area_in_square_meters`, `timezone_id`, `contact_id`, `is_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+(`id`, `name`, `uuid`, `parent_space_id`, `area`, `timezone_id`, `contact_id`, `is_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
 VALUES
     (1, 'MyEMS Headquarter', '9dfb7cff-f19f-4a1e-8c79-3adf6425bfd9', NULL, 99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
     (2, 'MyEMS Building #1', '8f25b33b-db93-49b3-b0f8-b01e0c19df29', 1, 88888.888, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
@@ -1267,7 +1267,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `buildings` VARCHAR(255) NOT NULL,
   `floors` VARCHAR(255) NOT NULL,
   `rooms` VARCHAR(255) NOT NULL,
-  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
+  `area` DECIMAL(18, 3) NOT NULL,
   `tenant_type_id` BIGINT NOT NULL,
   `is_key_tenant` BOOL NOT NULL,
   `lease_number` VARCHAR(255) NOT NULL,
@@ -1276,9 +1276,24 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `is_in_lease` BOOL NOT NULL,
   `contact_id` BIGINT,
   `cost_center_id` BIGINT,
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
 CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_tenants`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_tenants`
+(`id`, `name`, `uuid`, `parent_space_id`, `buildings`, `floors`, `rooms`, `area`, `tenant_type_id`, `is_key_tenant`,
+   `lease_number`, `lease_start_datetime_utc`, `lease_end_datetime_utc`, `is_in_lease`, `contact_id`, `cost_center_id`, `description`)
+VALUES
+    (1, 'Starbucks星巴克', '6b0da806-a4cd-431a-8116-2915e90aaf8b', 2, 'Building #1', 'L1 L2 L3', '1201b+2247+3F', 418.8, 9, true,
+       '6b0da806',  '2019-12-31 16:00:00', '2022-12-31 16:00:00', true, 1, 1,  'my description');
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenant_types`
@@ -1310,7 +1325,7 @@ VALUES
 (6, 'Service Apartment', '服务式公寓', 'SA'),
 (7, 'Development (Complex)', '整个物业项目', 'DV'),
 (8, 'Plant 1', '能源站 1', 'P1'),
-(9, 'Plant 2', '能源站 2', 'P2');
+(9, 'GasFood', '燃气餐饮租户', 'GF');
 
 COMMIT;
 
