@@ -389,7 +389,7 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
--- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`)
+-- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`, `cost_center_id`, `location` , `description`,  `advanced_type` )
 -- VALUES
 -- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false, 1, 'location', 'description', 'NULL'),
 -- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false, 1, 'location', 'description', 'NULL');
@@ -838,11 +838,11 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
   `parent_space_id` BIGINT,
-  `area_in_square_meters` DECIMAL(18, 3) NOT NULL,
+  `area` DECIMAL(18, 3) NOT NULL,
   `timezone_id` BIGINT NOT NULL,
-  `contact_id` BIGINT,
-  `is_counted` BOOL NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
+  `contact_id` BIGINT,
   `cost_center_id` BIGINT,
   `location` VARCHAR(255),
   `description` VARCHAR(255),
@@ -985,24 +985,24 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_virtual_meters` (
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_spaces_weather_points`
+-- Table `myems_system_db`.`tbl_spaces_points`
 -- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_weather_points` ;
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_points` ;
 
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_weather_points` (
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_points` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `space_id` BIGINT NOT NULL,
   `point_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`));
-CREATE INDEX `tbl_spaces_weather_points_index_1` ON  `myems_system_db`.`tbl_spaces_weather_points`   (`space_id`);
+CREATE INDEX `tbl_spaces_points_index_1` ON  `myems_system_db`.`tbl_spaces_points`   (`space_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_system_db`.`tbl_spaces_weather_points`
+-- Example Data for table `myems_system_db`.`tbl_spaces_points`
 -- ---------------------------------------------------------------------------------------------------------------------
 -- START TRANSACTION;
 -- USE `myems_system_db`;
 
--- INSERT INTO `myems_system_db`.`tbl_spaces_weather_points`
+-- INSERT INTO `myems_system_db`.`tbl_spaces_points`
 -- (`id`, space_id`, `point_id`)
 -- VALUES
 -- (1, 3, 2000001),
