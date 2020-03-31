@@ -1313,9 +1313,10 @@ DROP TABLE IF EXISTS `myems_system_db`.`tbl_tenant_types` ;
 
 CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenant_types` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `description` VARCHAR(128) NOT NULL,
-  `simplified_code` VARCHAR(128) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `simplified_code` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenant_types_index_1` ON  `myems_system_db`.`tbl_tenant_types`   (`name`);
 
@@ -1326,17 +1327,18 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_tenant_types`
-(`id`, `name`, `description`, `simplified_code`)
+(`id`, `name`, `uuid`, `description`, `simplified_code`)
 VALUES
-(1, 'Office', '办公', 'OF'),
-(2, 'Retail', '零售', 'RT'),
-(3, 'Carpark', '停车场', 'CA'),
-(4, 'Hotel', '酒店', 'HT'),
-(5, 'Residential', '住宅', 'RS'),
-(6, 'Service Apartment', '服务式公寓', 'SA'),
-(7, 'Development (Complex)', '整个物业项目', 'DV'),
-(8, 'Plant 1', '能源站 1', 'P1'),
-(9, 'GasFood', '燃气餐饮租户', 'GF');
+(1, 'Office', '83fffba1-9e22-4397-a93a-3742772c3753', '办公', 'OF'),
+(2, 'Retail', 'ad95ed16-1c57-49a9-a85e-71e389393089', '零售', 'RT'),
+(3, 'Carpark', '1dc21e83-4333-40f8-9e25-ea049becba37', '停车场', 'CA'),
+(4, 'Hotel', '4208a60d-d8e6-4fe5-8cea-a55109e9b397', '酒店', 'HT'),
+(5, 'Residential', 'fc4ae534-544a-4a22-b83b-9f4aa99494aa', '住宅', 'RS'),
+(6, 'Service Apartment', '6d1dca30-1cbe-463d-8a78-cdd5e0f8ac8b', '服务式公寓', 'SA'),
+(7, 'Development (Complex)', '2078e1c0-3936-4ae7-9253-08e0aa1d84b6', '整个物业项目', 'DV'),
+(8, 'Plant 1', 'b2a580a3-edc9-4838-ae1d-7b7265860a9a', '能源站 1', 'P1'),
+(9, 'GasFood', '55bbcba7-d8a0-44a0-9a9f-2f085e3cb044', '燃气餐饮租户', 'GF');
+
 
 COMMIT;
 
