@@ -8,137 +8,6 @@ CREATE DATABASE IF NOT EXISTS `myems_system_db` ;
 USE `myems_system_db` ;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_air_compressors`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_air_compressors` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_air_compressors` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_volume_flow` DECIMAL(18, 3)  NULL,
-  `rated_outlet_pressure` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `inlet_absolute_pressure_point_id` BIGINT NULL,
-  `outlet_absolute_pressure_point_id` BIGINT NULL,
-  `inlet_air_temperature_point_id` BIGINT NULL,
-  `instantaneous_volume_flow_point_id` BIGINT  NULL,
-  `instantaneous_input_power_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_air_flow_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_air_compressors_index_1` ON  `myems_system_db`.`tbl_air_compressors`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_air_handling_units`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_air_handling_units` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_air_handling_units` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `supply_air_tempreture_point_id` BIGINT  NULL,
-  `supply_air_humunidity_point_id` BIGINT  NULL,
-  `supply_air_flow_rate_point_id` BIGINT  NULL,
-  `supply_air_static_pressure_point_id` BIGINT  NULL,
-  `supply_air_valve_position_point_id` BIGINT  NULL,
-  `supply_air_fan_frenquency_point_id` BIGINT  NULL,
-  `outside_air_tempreture_point_id` BIGINT  NULL,
-  `outside_air_humunidity_point_id` BIGINT  NULL,
-  `outside_air_flow_rate_point_id` BIGINT  NULL,
-  `outside_air_valve_position_point_id` BIGINT  NULL,
-  `outside_air_fan_frenquency_point_id` BIGINT  NULL,
-  `outside_air_primary_effect_filter_status_point_id` BIGINT NULL,
-  `outside_air_medium_effect_filter_status_point_id` BIGINT NULL,
-  `return_air_tempreture_point_id` BIGINT  NULL,
-  `return_air_humunidity_point_id` BIGINT  NULL,
-  `return_air_flow_rate_point_id` BIGINT  NULL,
-  `return_air_co2_density_point_id` BIGINT  NULL,
-  `return_air_valve_position_point_id` BIGINT  NULL,
-  `return_air_fan_frenquency_point_id` BIGINT  NULL,
-  `return_air_filter_status_point_id` BIGINT NULL,
-  `exhaust_air_tempreture_point_id` BIGINT  NULL,
-  `exhaust_air_humunidity_point_id` BIGINT  NULL,
-  `exhaust_air_flow_rate_point_id` BIGINT  NULL,
-  `exhaust_air_co2_density_point_id` BIGINT  NULL,
-  `exhaust_air_valve_position_point_id` BIGINT  NULL,
-  `exhaust_air_fan_frenquency_point_id` BIGINT  NULL,
-  `air_mixer_valve_position_point_id` BIGINT  NULL,
-  `bypass_valve_position_point_id` BIGINT  NULL,
-  `heat_recovery_status_point_id` BIGINT NULL,
-  `heat_recovery_fan_frenquency_point_id` BIGINT NULL,
-  `water_coil_pump_status_point_id` BIGINT  NULL,
-  `water_coil_valve_position_point_id` BIGINT  NULL,
-  `water_coil_supply_tempreture_point_id` BIGINT  NULL,
-  `water_coil_return_tempreture_point_id` BIGINT  NULL,
-  `hot_water_coil_pump_status_point_id` BIGINT  NULL,
-  `hot_water_coil_valve_position_point_id` BIGINT  NULL,
-  `hot_water_coil_supply_tempreture_point_id` BIGINT  NULL,
-  `hot_water_coil_return_tempreture_point_id` BIGINT  NULL,
-  `cold_water_coil_pump_status_point_id` BIGINT  NULL,
-  `cold_water_coil_valve_position_point_id` BIGINT  NULL,
-  `cold_water_coil_supply_tempreture_point_id` BIGINT  NULL,
-  `cold_water_coil_return_tempreture_point_id` BIGINT  NULL,
-  `electic_heating_status_point_id` BIGINT NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_heating_meter_uuid` CHAR(36)   NULL,
-  `cumulative_cooling_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_air_handling_units_index_1` ON  `myems_system_db`.`tbl_air_handling_units`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_chilled_water_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_chilled_water_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_chilled_water_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_head` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `instantaneous_power_point_id` BIGINT  NULL,
-  `electric_motor_speed_point_id` BIGINT  NULL,
-  `chilled_water_instantaneous_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_chilled_water_flow_meter_uuid` CHAR(36)   NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_chilled_water_pumps_index_1` ON  `myems_system_db`.`tbl_chilled_water_pumps`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_chillers`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_chillers` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_chillers` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `nominal_cooling_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_cop` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_operating_current` DECIMAL(18, 3)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_current` DECIMAL(18, 3)  NULL,
-  `nominal_chilled_water_flow_rate` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_water_flow_rate` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `inlet_chilled_water_temperature_point_id` BIGINT  NULL,
-  `outlet_chilled_water_temperature_point_id` BIGINT  NULL,
-  `chilled_water_instantaneous_flow_rate_point_id` BIGINT  NULL,
-  `instantaneous_power_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_cooling_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_chillers_index_1` ON  `myems_system_db`.`tbl_chillers`   (`equipment_id`);
-
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_contacts`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_contacts` ;
@@ -161,55 +30,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_contacts` (
   VALUES
   (1, 'John', '5c5ce6e8-8d00-46b3-9602-4e1520a8b43f',  'john@myems.io', '+8613888888888', 'Building #1');
   COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_cooling_towers`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_cooling_towers` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_cooling_towers` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `instantaneous_power_point_id` BIGINT  NULL,
-  `cooling_water_inlet_temperature_point_id` BIGINT  NULL,
-  `cooling_water_outlet_temperature_point_id` BIGINT  NULL,
-  `fan_speed_point_id` BIGINT  NULL,
-  `pump_speed_point_id` BIGINT  NULL,
-  `dry_bulb_temperature_point_id` BIGINT  NULL,
-  `wet_bulb_temperature_point_id` BIGINT  NULL,
-  `air_humidity_point_id` BIGINT  NULL,
-  `cooling_water_instantaneous_flow_rate_point_id` BIGINT  NULL,
-  `cooling_water_pressure_point_id` BIGINT  NULL,
-  `cooling_water_conductivity_point_id` BIGINT  NULL,
-  `cooling_water_ph_value_point_id` BIGINT  NULL,
-  `cooling_water_tribidity_point_id` BIGINT  NULL,
-  `cumulative_heat_transfer_meter_uuid` CHAR(36)   NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_cooling_towers_index_1` ON  `myems_system_db`.`tbl_cooling_towers`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_cooling_water_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_cooling_water_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_cooling_water_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_head` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `instantaneous_power_point_id` BIGINT  NULL,
-  `electric_motor_speed_point_id` BIGINT  NULL,
-  `cooling_water_instantaneous_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_cooling_water_flow_meter_uuid` CHAR(36)   NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_cooling_water_pumps_index_1` ON  `myems_system_db`.`tbl_cooling_water_pumps`   (`equipment_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_cost_centers`
@@ -360,6 +180,53 @@ VALUES
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_equipment_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipment_parameters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipment_parameters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `equipment_id` BIGINT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
+  `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
+  `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
+  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_equipment_parameters`   (`equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_equipment_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_equipment_parameters`
+-- (`id`, `equipment_id`, `name`, `parameter_type`, `constant`, `point_id`, `numerator_meter_uuid`, `denominator_meter_uuid`)
+-- VALUES
+-- (1, 1, 'serial number', 'constant', 'bfa8b106', NULL, NULL, NULL),
+-- (2, 1, 'manufacturer', 'constant', 'York', NULL, NULL, NULL),
+-- (3, 1, 'maintainer', 'constant', 'Johnson Controls', NULL, NULL, NULL),
+-- (4, 1, 'use life start', 'constant', '2016-01-01', NULL, NULL, NULL),
+-- (5, 1, 'use life end', 'constant', '2025-12-31', NULL, NULL, NULL),
+-- (6, 1, 'model number', 'constant', 'CH01', NULL, NULL, NULL),
+-- (7, 1, 'nominal cooling capacity', 'constant', '90.000 kW', NULL, NULL, NULL),
+-- (8, 1, 'nominal cooling input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (9, 1, 'nominal cooling cop', 'constant', '5', NULL, NULL, NULL),
+-- (10, 1, 'nominal cooling operating current', 'constant', '120.000 A', NULL, NULL, NULL),
+-- (11, 1, 'rated input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (12, 1, 'nominal chilled water flow rate', 'constant', '30 m2/h', NULL, NULL, NULL),
+-- (13, 1, 'nominal cooling water flow_rate', 'constant', '50 m2/h', NULL, NULL, NULL),
+-- (14, 1, 'status', 'point', NULL, 1, NULL, NULL),
+-- (15, 1, 'inlet chilled water temperature', 'point', NULL, 2, NULL, NULL),
+-- (16, 1, 'chilled_water instantaneous flow rate', 'point', NULL, 3, NULL, NULL),
+-- (17, 1, 'instantaneous power', 'point', NULL, 4, NULL, NULL),
+-- (18, 1, 'COP', 'fraction', NULL, NULL, 'a4e0dbf0-528a-4cbb-88cc-563527900d40', '89ff5118-d0c2-4dd8-8098-a8698189b2ea');
+--
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_equipments`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipments` ;
@@ -368,18 +235,11 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `serial_number` VARCHAR(255) NOT NULL,
-  `manufacturer` VARCHAR(255) NOT NULL,
-  `maintainer` VARCHAR(255) NOT NULL,
-  `use_life_start` DATE NOT NULL,
-  `use_life_end` DATE NOT NULL,
-  `is_key_equipment` BOOL NOT NULL,
-  `is_counted` BOOL NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT,
   `location` VARCHAR(255),
   `description` VARCHAR(255),
-  `advanced_type` VARCHAR(255) COMMENT 'NULL, heat_pump, ground_source_heat_pump, high_temperature_heat_pump, process_heat_pump, steam_boiler, water_boiler, air_compressor, air_handling_unit, cooling_water_pump, chilled_water_pump, cooling_tower, chiller',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (`name`);
 
@@ -390,10 +250,10 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
--- (`id`, `name`, `uuid`, `serial_number`, `manufacturer`, `maintainer`, `use_life_start`, `use_life_end`, `is_key_equipment`, `is_counted`, `is_output_counted`, `cost_center_id`, `location` , `description`,  `advanced_type` )
+-- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`, `location` , `description` )
 -- VALUES
--- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', 'bfa8b106', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', true, true, false, 1, 'location', 'description', 'NULL'),
--- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', 'ad5798ec', 'York', 'Johnson Controls', '2016-01-01', '2025-12-31', false, true, false, 1, 'location', 'description', 'NULL');
+-- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', true, false, 1, 'location', 'description'),
+-- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', true, false, 1, 'location', 'description');
 
 -- COMMIT;
 
@@ -501,68 +361,6 @@ CREATE INDEX `tbl_expressions_index_1` ON  `myems_system_db`.`tbl_expressions`  
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_ground_source_heat_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_ground_source_heat_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_ground_source_heat_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `nominal_cooling_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_cop` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_operating_current` DECIMAL(18, 3)  NULL,
-  `nominal_heating_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_heating_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_heating_cop` DECIMAL(18, 3)  NULL,
-  `nominal_heating_operating_current` DECIMAL(18, 3)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_current` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `heating_cooling_mode_point_id` BIGINT  NULL,
-  `ruuning_hours_point_id` BIGINT  NULL,
-  `evaporator_water_supply_temperature_point_id` BIGINT  NULL,
-  `evaporator_water_return_temperature_point_id` BIGINT  NULL,
-  `condensor_water_supply_temperature_point_id` BIGINT  NULL,
-  `condensor_water_return_temperature_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_heating_meter_uuid` CHAR(36)   NULL,
-  `cumulative_cooling_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_ground_source_heat_pumps_index_1` ON  `myems_system_db`.`tbl_ground_source_heat_pumps`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_heat_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_heat_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_heat_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `nominal_cooling_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_cop` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_operating_current` DECIMAL(18, 3)  NULL,
-  `nominal_heating_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_heating_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_heating_cop` DECIMAL(18, 3)  NULL,
-  `nominal_heating_operating_current` DECIMAL(18, 3)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_current` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `setting_temperature_point_id` BIGINT  NULL,
-  `inlet_water_temperature_point_id` BIGINT  NULL,
-  `outlet_water_temperature_point_id` BIGINT  NULL,
-  `instantaneous_power_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_heating_meter_uuid` CHAR(36)   NULL,
-  `cumulative_cooling_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_heat_pumps_index_1` ON  `myems_system_db`.`tbl_heat_pumps`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_help_files`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_help_files` ;
@@ -577,32 +375,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_help_files` (
 PRIMARY KEY (`id`));
 CREATE INDEX `tbl_help_files_index_1` ON  `myems_system_db`.`tbl_help_files`   (`file_name`);
 CREATE INDEX `tbl_help_files_index_2` ON  `myems_system_db`.`tbl_help_files`   (`upload_datetime_utc`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_high_temperature_heat_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_high_temperature_heat_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_high_temperature_heat_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `nominal_heating_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_heating_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_heating_cop` DECIMAL(18, 3)  NULL,
-  `nominal_heating_operating_current` DECIMAL(18, 3)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_current` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `ruuning_hours_point_id` BIGINT  NULL,
-  `evaporator_water_supply_temperature_point_id` BIGINT  NULL,
-  `evaporator_water_return_temperature_point_id` BIGINT  NULL,
-  `condensor_water_supply_temperature_point_id` BIGINT  NULL,
-  `condensor_water_return_temperature_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_heating_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_high_temperature_heat_pumps_index_1` ON  `myems_system_db`.`tbl_high_temperature_heat_pumps`   (`equipment_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_meters`
@@ -760,32 +532,6 @@ CREATE INDEX `tbl_points_index_3` ON  `myems_system_db`.`tbl_points`   (`id`, `o
 -- 'PE', 'PA', 'MK', 'DB', 'CT', 'TM'
 
 -- COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_process_heat_pumps`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_process_heat_pumps` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_process_heat_pumps` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `nominal_cooling_capacity` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_input_power` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_cop` DECIMAL(18, 3)  NULL,
-  `nominal_cooling_operating_current` DECIMAL(18, 3)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_current` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `ruuning_hours_point_id` BIGINT  NULL,
-  `chilled_water_supply_temperature_point_id` BIGINT  NULL,
-  `chilled_water_return_temperature_point_id` BIGINT  NULL,
-  `cooling_water_supply_temperature_point_id` BIGINT  NULL,
-  `cooling_water_return_temperature_point_id` BIGINT  NULL,
-  `cumulative_power_meter_uuid` CHAR(36)   NULL,
-  `cumulative_cooling_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_process_heat_pumps_index_1` ON  `myems_system_db`.`tbl_process_heat_pumps`   (`equipment_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_sensors`
@@ -1022,34 +768,6 @@ CREATE INDEX `tbl_spaces_points_index_1` ON  `myems_system_db`.`tbl_spaces_point
 -- (4, 3, 2000006);
 
 -- COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_steam_boilers`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_steam_boilers` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_steam_boilers` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_evaporation_rate` DECIMAL(18, 3)  NULL,
-  `rated_steam_pressure` DECIMAL(18, 3)  NULL,
-  `rated_steam_temperature` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `supply_water_temperature_point_id` BIGINT  NULL,
-  `water_level_point_id` BIGINT  NULL,
-  `water_flow_rate_point_id` BIGINT  NULL,
-  `flue_gas_temperature_point_id` BIGINT  NULL,
-  `flue_gas_co_concentration_point_id` BIGINT  NULL,
-  `steam_temperature_point_id` BIGINT  NULL,
-  `steam_pressure_point_id` BIGINT  NULL,
-  `instantaneous_steam_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_steam_flow_meter_uuid` CHAR(36)   NULL,
-  `instantaneous_natural_gas_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_natural_gas_flow_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_steam_boilers_index_1` ON  `myems_system_db`.`tbl_steam_boilers`   (`equipment_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tariffs`
@@ -1651,32 +1369,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_variables` (
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_water_boilers`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_water_boilers` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_water_boilers` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `model_number` VARCHAR(128)  NULL,
-  `rated_input_power` DECIMAL(18, 3)  NULL,
-  `rated_supply_water_temperature` DECIMAL(18, 3)  NULL,
-  `rated_return_water_temperature` DECIMAL(18, 3)  NULL,
-  `rated_supply_water_pressure` DECIMAL(18, 3)  NULL,
-  `status_point_id` BIGINT  NULL,
-  `supply_water_temperature_point_id` BIGINT  NULL,
-  `return_water_temperature_point_id` BIGINT  NULL,
-  `instantaneous_water_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_water_flow_meter_uuid` CHAR(36)   NULL,
-  `flue_gas_temperature_point_id` BIGINT  NULL,
-  `flue_gas_co_concentration_point_id` BIGINT  NULL,
-  `instantaneous_natural_gas_flow_rate_point_id` BIGINT  NULL,
-  `cumulative_natural_gas_flow_meter_uuid` CHAR(36)   NULL,
-  `cumulative_heating_meter_uuid` CHAR(36)   NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_water_boilers_index_1` ON  `myems_system_db`.`tbl_water_boilers`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_versions`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_versions` ;
@@ -1686,6 +1378,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_versions` (
   `version` VARCHAR(256) NOT NULL,
   `release_date` DATE NOT NULL,
   PRIMARY KEY (`id`));
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_versions`
 -- ---------------------------------------------------------------------------------------------------------------------
