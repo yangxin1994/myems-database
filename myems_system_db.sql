@@ -180,53 +180,6 @@ VALUES
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_equipment_parameters`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipment_parameters` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipment_parameters` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `equipment_id` BIGINT NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
-  `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
-  `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
-  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
-  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_equipment_parameters`   (`equipment_id`);
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_system_db`.`tbl_equipment_parameters`
--- ---------------------------------------------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_system_db`;
---
--- INSERT INTO `myems_system_db`.`tbl_equipment_parameters`
--- (`id`, `equipment_id`, `name`, `parameter_type`, `constant`, `point_id`, `numerator_meter_uuid`, `denominator_meter_uuid`)
--- VALUES
--- (1, 1, 'serial number', 'constant', 'bfa8b106', NULL, NULL, NULL),
--- (2, 1, 'manufacturer', 'constant', 'York', NULL, NULL, NULL),
--- (3, 1, 'maintainer', 'constant', 'Johnson Controls', NULL, NULL, NULL),
--- (4, 1, 'use life start', 'constant', '2016-01-01', NULL, NULL, NULL),
--- (5, 1, 'use life end', 'constant', '2025-12-31', NULL, NULL, NULL),
--- (6, 1, 'model number', 'constant', 'CH01', NULL, NULL, NULL),
--- (7, 1, 'nominal cooling capacity', 'constant', '90.000 kW', NULL, NULL, NULL),
--- (8, 1, 'nominal cooling input power', 'constant', '100.000 kW', NULL, NULL, NULL),
--- (9, 1, 'nominal cooling cop', 'constant', '5', NULL, NULL, NULL),
--- (10, 1, 'nominal cooling operating current', 'constant', '120.000 A', NULL, NULL, NULL),
--- (11, 1, 'rated input power', 'constant', '100.000 kW', NULL, NULL, NULL),
--- (12, 1, 'nominal chilled water flow rate', 'constant', '30 m2/h', NULL, NULL, NULL),
--- (13, 1, 'nominal cooling water flow_rate', 'constant', '50 m2/h', NULL, NULL, NULL),
--- (14, 1, 'status', 'point', NULL, 1, NULL, NULL),
--- (15, 1, 'inlet chilled water temperature', 'point', NULL, 2, NULL, NULL),
--- (16, 1, 'chilled_water instantaneous flow rate', 'point', NULL, 3, NULL, NULL),
--- (17, 1, 'instantaneous power', 'point', NULL, 4, NULL, NULL),
--- (18, 1, 'COP', 'fraction', NULL, NULL, 'a4e0dbf0-528a-4cbb-88cc-563527900d40', '89ff5118-d0c2-4dd8-8098-a8698189b2ea');
---
--- COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_equipments`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipments` ;
@@ -308,6 +261,53 @@ CREATE INDEX `tbl_equipments_offline_meters_index_1` ON  `myems_system_db`.`tbl_
 -- VALUES
 -- (1, 1, 1, false);
 
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_equipments_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_equipments_parameters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments_parameters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `equipment_id` BIGINT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
+  `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
+  `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
+  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_equipments_parameters`   (`equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_equipments_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_equipments_parameters`
+-- (`id`, `equipment_id`, `name`, `parameter_type`, `constant`, `point_id`, `numerator_meter_uuid`, `denominator_meter_uuid`)
+-- VALUES
+-- (1, 1, 'serial number', 'constant', 'bfa8b106', NULL, NULL, NULL),
+-- (2, 1, 'manufacturer', 'constant', 'York', NULL, NULL, NULL),
+-- (3, 1, 'maintainer', 'constant', 'Johnson Controls', NULL, NULL, NULL),
+-- (4, 1, 'use life start', 'constant', '2016-01-01', NULL, NULL, NULL),
+-- (5, 1, 'use life end', 'constant', '2025-12-31', NULL, NULL, NULL),
+-- (6, 1, 'model number', 'constant', 'CH01', NULL, NULL, NULL),
+-- (7, 1, 'nominal cooling capacity', 'constant', '90.000 kW', NULL, NULL, NULL),
+-- (8, 1, 'nominal cooling input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (9, 1, 'nominal cooling cop', 'constant', '5', NULL, NULL, NULL),
+-- (10, 1, 'nominal cooling operating current', 'constant', '120.000 A', NULL, NULL, NULL),
+-- (11, 1, 'rated input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (12, 1, 'nominal chilled water flow rate', 'constant', '30 m2/h', NULL, NULL, NULL),
+-- (13, 1, 'nominal cooling water flow_rate', 'constant', '50 m2/h', NULL, NULL, NULL),
+-- (14, 1, 'status', 'point', NULL, 1, NULL, NULL),
+-- (15, 1, 'inlet chilled water temperature', 'point', NULL, 2, NULL, NULL),
+-- (16, 1, 'chilled_water instantaneous flow rate', 'point', NULL, 3, NULL, NULL),
+-- (17, 1, 'instantaneous power', 'point', NULL, 4, NULL, NULL),
+-- (18, 1, 'COP', 'fraction', NULL, NULL, 'a4e0dbf0-528a-4cbb-88cc-563527900d40', '89ff5118-d0c2-4dd8-8098-a8698189b2ea');
+--
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
