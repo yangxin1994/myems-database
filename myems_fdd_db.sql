@@ -86,9 +86,9 @@ CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_rules` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `channels` VARCHAR(128) NOT NULL COMMENT 'call, sms, email, wechat, web',
-  `expressions` TEXT NOT NULL COMMENT 'logics of spaces, meters, KPIs, recipients in JSON',
-  `messages` TEXT NOT NULL COMMENT 'string template that supports $-substitutions',
+  `channel` VARCHAR(128) NOT NULL COMMENT 'call, sms, email, wechat, web',
+  `expression` TEXT NOT NULL COMMENT 'logics of spaces, meters, KPIs, recipients in JSON',
+  `message` TEXT NOT NULL COMMENT 'string template that supports $-substitutions',
   `is_enabled` BOOL NOT NULL,
   `mute_start_datetime_utc` DATETIME,
   `mute_end_datetime_utc` DATETIME,
@@ -99,14 +99,14 @@ CREATE INDEX `tbl_rules_index_1` ON  `myems_fdd_db`.`tbl_rules`  (`name`);
 -- USE `myems_fdd_db`;
 --
 -- INSERT INTO `myems_fdd_db`.`tbl_rules`
--- (`name`, `uuid`, `channels`, `expressions`, `messages`)
+-- (`name`, `uuid`, `channel`, `expression`, `message`, is_enabled, mute_start_datetime_utc, mute_end_datetime_utc)
 -- VALUES
 -- -- id 1
 -- ('设备数据没有采集超24小时报警', 'f014b1ef-44df-4ebc-9109-7df8765c17d9', 'email', '[{}]', '%s没有采集到电表数据已经超24小时，请注意确认原因。', true, null, null),
 -- -- id 2
 -- ('当月能耗超设定指标', '775ba8a7-9d34-44e3-8d12-1432acfe911f', 'sms', '[{}]', '%s %s月份能耗超设定指标，请注意能源使用效率。', true, null, null),
 -- -- id 3
--- ('电压不平衡度超50%', 'cff52b12-5423-4c3e-87ea-54540c3f72f5', 'email', '[{}]', '%s电压不平衡。', true, '2020-03-31 16:00:00', '2020-04-30 16:00:00'),
+-- ('电压不平衡度超50%', 'cff52b12-5423-4c3e-87ea-54540c3f72f5', 'email', '[{}]', '%s电压不平衡。', true, '2020-04-30 16:00:00', '2020-05-05 16:00:00'),
 -- -- id 4
 -- ('电流不平衡度超50%', 'c8f4dc4a-da27-453d-b640-515207602135', 'email', '[{}]', '%s电流不平衡。', true, null, null);
 --
