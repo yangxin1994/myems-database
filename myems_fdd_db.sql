@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_email_servers` (
   `host` VARCHAR(255) NOT NULL,
   `port` INT NOT NULL,
   `requires_authentication` BOOL NOT NULL,
-  `user` VARCHAR(255),
+  `user_name` VARCHAR(255),
   `password` VARCHAR(255),
   `from_addr` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`));
