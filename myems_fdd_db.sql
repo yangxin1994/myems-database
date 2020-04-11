@@ -40,24 +40,24 @@ CREATE INDEX `tbl_email_messages_index_1` ON  `myems_fdd_db`.`tbl_email_messages
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_fdd_db`.`tbl_gsm_configs`
+-- Table `myems_fdd_db`.`tbl_gsm_modems`
 -- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_gsm_configs` ;
+DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_gsm_modems` ;
 
-CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_gsm_configs` (
+CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_gsm_modems` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `port` VARCHAR(64) NOT NULL,
-  `baudrate` INT NOT NULL,
+  `serial_port` VARCHAR(64) NOT NULL,
+  `baud_rate` INT NOT NULL,
   PRIMARY KEY (`id`));
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Data for table `myems_fdd_db`.`tbl_gsm_configs`
+-- Data for table `myems_fdd_db`.`tbl_gsm_modems`
 -- ---------------------------------------------------------------------------------------------------------------------
 START TRANSACTION;
 USE `myems_fdd_db`;
 
-INSERT INTO `myems_fdd_db`.`tbl_gsm_configs`
-(`id`, `port`, `baudrate`)
+INSERT INTO `myems_fdd_db`.`tbl_gsm_modems`
+(`id`, `serial_port`, `baud_rate`)
 VALUES
 (1, '/dev/ttyS0', 115200);
 
