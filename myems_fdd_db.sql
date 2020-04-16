@@ -26,20 +26,6 @@ CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_email_messages` (
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_email_messages_index_1` ON  `myems_fdd_db`.`tbl_email_messages`  (`status`,   `scheduled_datetime_utc`);
 
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_fdd_db`.`tbl_email_recipients`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_email_recipients` ;
-
-CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_email_recipients` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(32) NOT NULL,
-  `uuid` CHAR(36) NOT NULL,
-  `email` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_email_recipients_index_1` ON  `myems_fdd_db`.`tbl_email_recipients`  (`name`);
-
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_fdd_db`.`tbl_email_recipients`
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -54,24 +40,24 @@ CREATE INDEX `tbl_email_recipients_index_1` ON  `myems_fdd_db`.`tbl_email_recipi
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_fdd_db`.`tbl_gsm_configs`
+-- Table `myems_fdd_db`.`tbl_gsm_modems`
 -- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_gsm_configs` ;
+DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_gsm_modems` ;
 
-CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_gsm_configs` (
+CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_gsm_modems` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `port` VARCHAR(64) NOT NULL,
-  `baudrate` INT NOT NULL,
+  `serial_port` VARCHAR(64) NOT NULL,
+  `baud_rate` INT NOT NULL,
   PRIMARY KEY (`id`));
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Data for table `myems_fdd_db`.`tbl_gsm_configs`
+-- Data for table `myems_fdd_db`.`tbl_gsm_modems`
 -- ---------------------------------------------------------------------------------------------------------------------
 START TRANSACTION;
 USE `myems_fdd_db`;
 
-INSERT INTO `myems_fdd_db`.`tbl_gsm_configs`
-(`id`, `port`, `baudrate`)
+INSERT INTO `myems_fdd_db`.`tbl_gsm_modems`
+(`id`, `serial_port`, `baud_rate`)
 VALUES
 (1, '/dev/ttyS0', 115200);
 
@@ -139,32 +125,32 @@ CREATE INDEX `tbl_sms_recipients_index_1` ON  `myems_fdd_db`.`tbl_sms_recipients
 -- COMMIT;
 
 -- ----------------------------------------------------------------------------------
--- Table `myems_fdd_db`.`tbl_smtp_configs`
+-- Table `myems_fdd_db`.`tbl_email_servers`
 -- ----------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_smtp_configs` ;
+DROP TABLE IF EXISTS `myems_fdd_db`.`tbl_email_servers` ;
 
-CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_smtp_configs` (
+CREATE TABLE IF NOT EXISTS `myems_fdd_db`.`tbl_email_servers` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `host` VARCHAR(255) NOT NULL,
   `port` INT NOT NULL,
   `requires_authentication` BOOL NOT NULL,
-  `user` VARCHAR(255),
+  `user_name` VARCHAR(255),
   `password` VARCHAR(255),
   `from_addr` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`));
 
 -- ----------------------------------------------------------------------------------
--- Data for table `myems_fdd_db`.`tbl_smtp_configs`
+-- Data for table `myems_fdd_db`.`tbl_email_servers`
 -- ----------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_fdd_db`;
---
--- INSERT INTO `myems_fdd_db`.`tbl_smtp_configs`
--- (`id`, `host`, `port`, `requires_authentication`, `user`, `password`, `from_addr`)
--- VALUES
--- (1, 'smtp.163.com', 25, true, 'myems', 'Sm9ocdMxbjE=', 'myems@163.com');
---
--- COMMIT;
+START TRANSACTION;
+USE `myems_fdd_db`;
+
+INSERT INTO `myems_fdd_db`.`tbl_email_servers`
+(`id`, `host`, `port`, `requires_authentication`, `user_name`, `password`, `from_addr`)
+VALUES
+(1, 'smtp.163.com', 25, true, 'myems', 'bXllbXM=', 'myems@163.com');
+
+COMMIT;
 
 -- ----------------------------------------------------------------------------------
 -- Table `myems_fdd_db`.`tbl_text_messages_outbox`
