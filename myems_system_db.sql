@@ -1022,17 +1022,17 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `rooms` VARCHAR(255) NOT NULL,
   `area` DECIMAL(18, 3) NOT NULL,
   `tenant_type_id` BIGINT NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
   `is_key_tenant` BOOL NOT NULL,
   `lease_number` VARCHAR(255) NOT NULL,
   `lease_start_datetime_utc` DATETIME NOT NULL,
   `lease_end_datetime_utc` DATETIME NOT NULL,
   `is_in_lease` BOOL NOT NULL,
-  `contact_id` BIGINT,
-  `cost_center_id` BIGINT,
+  `contact_id` BIGINT NOT NULL,
+  `cost_center_id` BIGINT NOT NULL,
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_tenants_index_1` ON  `myems_system_db`.`tbl_tenants`   (`name`);
-CREATE INDEX `tbl_tenants_index_2` ON  `myems_system_db`.`tbl_tenants`   (`parent_space_id`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_tenants`
@@ -1041,10 +1041,10 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_tenants`
-(`id`, `name`, `uuid`, `parent_space_id`, `buildings`, `floors`, `rooms`, `area`, `tenant_type_id`, `is_key_tenant`,
+(`id`, `name`, `uuid`, `buildings`, `floors`, `rooms`, `area`, `tenant_type_id`, `is_input_counted`, `is_key_tenant`,
    `lease_number`, `lease_start_datetime_utc`, `lease_end_datetime_utc`, `is_in_lease`, `contact_id`, `cost_center_id`, `description`)
 VALUES
-    (1, 'Starbucks星巴克', '6b0da806-a4cd-431a-8116-2915e90aaf8b', 'Building #1', 'L1 L2 L3', '1201b+2247+3F', 418.8, 9, true,
+    (1, 'Starbucks星巴克', '6b0da806-a4cd-431a-8116-2915e90aaf8b', 'Building #1', 'L1 L2 L3', '1201b+2247+3F', 418.8, 9, true, true,
        '6b0da806',  '2019-12-31 16:00:00', '2022-12-31 16:00:00', true, 1, 1,  'my description');
 COMMIT;
 
