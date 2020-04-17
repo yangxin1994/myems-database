@@ -717,6 +717,31 @@ CREATE INDEX `tbl_spaces_sensors_index_1` ON  `myems_system_db`.`tbl_spaces_sens
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_spaces_tenants`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_tenants` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_tenants` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `tenant_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_spaces_tenants_index_1` ON  `myems_system_db`.`tbl_spaces_tenants`   (`space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces_tenants`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_spaces_tenants`
+-- (`id`, `space_id`, `tenant_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces_virtual_meters`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_virtual_meters` ;
@@ -992,7 +1017,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_tenants` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `parent_space_id` BIGINT NOT NULL,
   `buildings` VARCHAR(255) NOT NULL,
   `floors` VARCHAR(255) NOT NULL,
   `rooms` VARCHAR(255) NOT NULL,
@@ -1020,7 +1044,7 @@ INSERT INTO `myems_system_db`.`tbl_tenants`
 (`id`, `name`, `uuid`, `parent_space_id`, `buildings`, `floors`, `rooms`, `area`, `tenant_type_id`, `is_key_tenant`,
    `lease_number`, `lease_start_datetime_utc`, `lease_end_datetime_utc`, `is_in_lease`, `contact_id`, `cost_center_id`, `description`)
 VALUES
-    (1, 'Starbucks星巴克', '6b0da806-a4cd-431a-8116-2915e90aaf8b', 2, 'Building #1', 'L1 L2 L3', '1201b+2247+3F', 418.8, 9, true,
+    (1, 'Starbucks星巴克', '6b0da806-a4cd-431a-8116-2915e90aaf8b', 'Building #1', 'L1 L2 L3', '1201b+2247+3F', 418.8, 9, true,
        '6b0da806',  '2019-12-31 16:00:00', '2022-12-31 16:00:00', true, 1, 1,  'my description');
 COMMIT;
 
