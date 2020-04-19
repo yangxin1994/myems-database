@@ -609,7 +609,7 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_spaces`
-(`id`, `name`, `uuid`, `parent_space_id`, `area`, `timezone_id`, `contact_id`, `is_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+(`id`, `name`, `uuid`, `parent_space_id`, `area`, `timezone_id`, `contact_id`, `is_input_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
 VALUES
     -- DO NOT deleted the record which ID is 1. It's the root space.
     (1, 'MyEMS Headquarter', '9dfb7cff-f19f-4a1e-8c79-3adf6425bfd9', NULL, 99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
