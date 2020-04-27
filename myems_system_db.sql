@@ -47,15 +47,14 @@ CREATE INDEX `tbl_cost_centers_index_1` ON  `myems_system_db`.`tbl_cost_centers`
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_cost_centers`
 -- ---------------------------------------------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_system_db`;
+START TRANSACTION;
+USE `myems_system_db`;
 
--- INSERT INTO `myems_system_db`.`tbl_cost_centers`
--- (`id`, `name`, `uuid`, `global_id`)
--- VALUES
--- (1, '成本中心1', 'd97b9736-c4f9-4005-a534-6af3487303ad', NULL);
--- (2, '成本中心2', 'aa9b4e27-df2c-4b39-9e87-cba3e1f0ab26', '1010248003');
--- COMMIT;
+INSERT INTO `myems_system_db`.`tbl_cost_centers`
+(`id`, `name`, `uuid`, `external_id`)
+VALUES
+(1, '成本中心', 'd97b9736-c4f9-4005-a534-6af3487303ad', NULL);
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_cost_centers_tariffs`
@@ -361,20 +360,20 @@ CREATE INDEX `tbl_expressions_index_1` ON  `myems_system_db`.`tbl_expressions`  
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_help_files`
+-- Table `myems_system_db`.`tbl_knowledge_files`
 -- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_help_files` ;
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_knowledge_files` ;
 
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_help_files` (
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_knowledge_files` (
 `id` BIGINT NOT NULL AUTO_INCREMENT,
 `file_name` VARCHAR(255) NOT NULL,
 `uuid` CHAR(36) NOT NULL,
 `upload_datetime_utc` DATETIME NOT NULL,
-`user_uuid` CHAR(36) NOT NULL,
+`upload_user_uuid` CHAR(36) NOT NULL,
 `file_object` LONGBLOB NOT NULL,
 PRIMARY KEY (`id`));
-CREATE INDEX `tbl_help_files_index_1` ON  `myems_system_db`.`tbl_help_files`   (`file_name`);
-CREATE INDEX `tbl_help_files_index_2` ON  `myems_system_db`.`tbl_help_files`   (`upload_datetime_utc`);
+CREATE INDEX `tbl_knowledge_files_index_1` ON  `myems_system_db`.`tbl_knowledge_files`   (`file_name`);
+CREATE INDEX `tbl_knowledge_files_index_2` ON  `myems_system_db`.`tbl_knowledge_files`   (`upload_datetime_utc`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_meters`
