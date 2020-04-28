@@ -178,6 +178,99 @@ VALUES
 
 COMMIT;
 
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_energy_flow_diagrams`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_energy_flow_diagrams` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_energy_flow_diagrams` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_energy_flow_diagrams_index_1` ON  `myems_system_db`.`tbl_energy_flow_diagrams`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_energy_flow_diagrams`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_energy_flow_diagrams`
+-- (`id`, `name`, `uuid`)
+-- VALUES
+-- (1, '低压配电系统', '3ccbc9c6-9575-4212-a63a-a688d1154302');
+--
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_energy_flow_diagrams_nodes`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_energy_flow_diagrams_nodes` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_energy_flow_diagrams_nodes` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `energy_flow_diagram_id` BIGINT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_energy_flow_diagrams_nodes_index_1` ON  `myems_system_db`.`tbl_energy_flow_diagrams_nodes`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_energy_flow_diagrams_nodes`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_energy_flow_diagrams_nodes`
+-- (`id`, `energy_flow_diagram_id`, `name`)
+-- VALUES
+-- (1, 1, '10KV进线#1'),
+-- (2, 1, '10KV进线#2'),
+-- (3, 1, '租区'),
+-- (4, 1, '公区'),
+-- (5, 1, '酒店'),
+-- (6, 1, '车库'),
+-- (7, 1, '餐饮'),
+-- (8, 1, '零售'),
+-- (9, 1, '照明'),
+-- (10, 1, '电梯');
+--
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_energy_flow_diagrams_links`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_energy_flow_diagrams_links` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_energy_flow_diagrams_links` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `energy_flow_diagram_id` BIGINT NOT NULL,
+  `source_node_id` BIGINT NOT NULL,
+  `target_node_id` BIGINT NOT NULL,
+  `meter_uuid` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_energy_flow_diagrams_nodes_index_1` ON  `myems_system_db`.`tbl_energy_flow_diagrams_links`   (`energy_flow_diagram_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_energy_flow_diagrams_links`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_energy_flow_diagrams_links`
+-- (`id`, `energy_flow_diagram_id`, `name`)
+-- VALUES
+-- (1, 1, 1, 3, '5ca47bc5-22c2-47fc-b906-33222191ea40'),
+-- (2, 1, 2, 4, '5d4d2f06-6200-4671-b182-4cf32cd9228f'),
+-- (3, 1, 2, 5, '7897665b-66ac-481d-9c31-2ab2ecbda16c'),
+-- (4, 1, 2, 6, 'f0c278ec-eb32-4c5e-a35f-88643b00c367'),
+-- (5, 1, 3, 7, '9918aa6c-79e9-4579-8f2e-a76eb9fe4e3e'),
+-- (6, 1, 3, 8, '831cbc8c-1429-4840-946e-f0b389b2253e'),
+-- (7, 1, 4, 9, 'd2fc8464-3f13-42a9-8a57-63f95f677f0f'),
+-- (8, 1, 4, 10, '7e4b3831-887b-40e2-b7f8-4d77c6f206a9');
+--
+-- COMMIT;
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_equipments`
 -- ---------------------------------------------------------------------------------------------------------------------
