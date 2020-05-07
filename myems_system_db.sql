@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_distribution_circuits` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
+  `distribution_system_id` BIGINT NOT NULL,
   `distribution_room` VARCHAR(255) NOT NULL COMMENT '配电房, 配电间',
   `switchgear` VARCHAR(255) NOT NULL COMMENT '高/低压配电柜',
   `peak_load` DECIMAL(18, 3)  COMMENT '最大容量, 设备容量(KW)',
@@ -136,15 +137,15 @@ CREATE INDEX `tbl_distribution_circuits_index_1` ON  `myems_system_db`.`tbl_dist
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_distribution_circuits`
 -- ---------------------------------------------------------------------------------------------------------------------
-START TRANSACTION;
-USE `myems_system_db`;
-
-INSERT INTO `myems_system_db`.`tbl_distribution_circuits`
-(`id`, `name`, `uuid`, `distribution_room`, `switchgear`, `peak_load`, `peak_current`, `customers`, `meters`)
-VALUES
-(1, '51W91', '52f7abe1-ba0e-47a6-a327-4faac42a1d11', 'EW1', '51AL9', 30, 53.6, '地下室应急照明', 'ALE-1102, ALE-1082');
-
-COMMIT;
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_distribution_circuits`
+-- (`id`, `name`, `uuid`, `distribution_system_id`, `distribution_room`, `switchgear`, `peak_load`, `peak_current`, `customers`, `meters`)
+-- VALUES
+-- (1, '51W91', '52f7abe1-ba0e-47a6-a327-4faac42a1d11', 1, 'EW1', '51AL9', 30, 53.6, '地下室应急照明', 'ALE-1102, ALE-1082');
+--
+-- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_distribution_circuits_points`
@@ -194,28 +195,6 @@ CREATE INDEX `tbl_distribution_systems_index_1` ON  `myems_system_db`.`tbl_distr
 -- VALUES
 -- (1, '示例配电系统', '95652719-56fa-44cc-9bef-7aa47664d4ff', '<?xml version="1.0" encoding="UTF-8"?><svg width="5cm" height="4cm" version="1.1" xmlns="http://www.w3.org/2000/svg"><desc>Four separate rectangles</desc><rect x=".5cm" y=".5cm" width="2cm" height="1cm"/></svg>', 'demo distribution system');
 --
--- COMMIT;
-
--- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_system_db`.`tbl_distribution_systems_distribution_circuits`
--- ---------------------------------------------------------------------------------------------------------------------
-DROP TABLE IF EXISTS `myems_system_db`.`tbl_distribution_systems_distribution_circuits` ;
-
-CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_distribution_systems_distribution_circuits` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `distribution_system_id` BIGINT NOT NULL,
-  `distribution_circuit_id` BIGINT NOT NULL,
-  PRIMARY KEY (`id`));
-CREATE INDEX `tbl_distribution_systems_distribution_circuits_index_1` ON  `myems_system_db`.`tbl_distribution_systems_distribution_circuits`   (`distribution_system_id`);
--- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_system_db`.`tbl_distribution_systems_distribution_circuits`
--- ---------------------------------------------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_system_db`;
-
--- INSERT INTO `myems_system_db`.`tbl_distribution_systems_distribution_circuits`
--- (`id`, `distribution_system_id`, `distribution_circuit_id`)
--- VALUES (1, 1, 1);
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
