@@ -365,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `uuid` CHAR(36) NOT NULL,
   `is_input_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
-  `cost_center_id` BIGINT,
+  `cost_center_id` BIGINT NOT NULL,
   `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
