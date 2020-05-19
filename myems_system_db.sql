@@ -652,7 +652,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_points` (
   `data_source_id` BIGINT NOT NULL,
   `object_type` VARCHAR(32) NOT NULL,
   `units` VARCHAR(32) NOT NULL,
-  `hi_limit` DECIMAL(18, 3) NOT NULL,
+  `high_limit` DECIMAL(18, 3) NOT NULL,
   `low_limit` DECIMAL(18, 3) NOT NULL,
   `ratio` DECIMAL(18, 3) NULL,
   `is_trend` BOOL NOT NULL,
@@ -673,7 +673,7 @@ CREATE INDEX `tbl_points_index_3` ON  `myems_system_db`.`tbl_points`   (`id`, `o
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_points`
--- (`id`, `name`, `data_source_id`, `object_type`, `units`, `low_limit`, `hi_limit`, `ratio`, `is_trend`, `address`)
+-- (`id`, `name`, `data_source_id`, `object_type`, `units`, `low_limit`, `high_limit`, `ratio`, `is_trend`, `address`)
 -- VALUES
 -- (1, 'Active Energy Import Tariff 1', 1, 'ENERGY_VALUE', 'Wh', 0, 99999999999, null, true,
 --   '{\"slave_id\":1, \"function_code\":3, \"offset\":801, \"number_of_registers\":4, \"format\":\"=d\"}'),
