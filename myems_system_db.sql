@@ -565,6 +565,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
   `cost_center_id` BIGINT NOT NULL,
   `energy_item_id` BIGINT,
+  `parent_meter_id` BIGINT,
   `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
@@ -578,11 +579,11 @@ CREATE INDEX `tbl_meters_index_3` ON  `myems_system_db`.`tbl_meters`   (`energy_
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `parent_meter_id`, `location`, `description`)
 -- VALUES
--- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor1', 'meter1'),
--- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor2', 'meter2'),
--- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 1, 'floor2', 'meter3');
+-- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, null, 'floor1', 'meter1'),
+-- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 1, 'floor2', 'meter2'),
+-- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 1, 1, 'floor2', 'meter3');
 
 -- COMMIT;
 
@@ -653,8 +654,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_points` (
   `object_type` VARCHAR(32) NOT NULL,
   `units` VARCHAR(32) NOT NULL,
   `high_limit` DECIMAL(18, 3) NOT NULL,
-  `low_limit` DECIMAL(18, 3) NOT NULL,
-  `ratio` DECIMAL(18, 3) NULL,
+  `low_limit` DECIMAL(18, 3) DEFAULT 1.000 NOT NULL ,
+  `ratio` DECIMAL(18, 3) DEFAULT 1.000 NOT NULL,
   `is_trend` BOOL NOT NULL,
   `address` JSON NOT NULL,
   PRIMARY KEY (`id`));
