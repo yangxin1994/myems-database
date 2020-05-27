@@ -224,12 +224,14 @@ VALUES
 (1, '电', '6d0753ed-8b43-4332-b6fd-d2f5813831d3', 'kWh', 0.1229, 0.928),
 (2, '自来水', '3dbfa598-fccc-4d60-bf11-14bd55540c66', 'm³', 0.0857, 0.910),
 (3, '天然气', '6d0753ed-8b43-4332-b6fd-d2f5813831d3', 'm³', 1.3300, 2.1622),
-(4,'4℃冷冻水','d2a3021a-4911-4611-856e-80133000f1d5','m³',1,1),
-(5,'7℃冷冻水','c1ad0696-e1ab-4e0c-a342-b194c0bc27e0','m³',1,1),
-(6,'蒸汽','ac91a5c4-4ae5-4a73-8e3f-044591f42eef','T',1,1),
-(7,'压缩空气','ff238e98-cd35-47c5-88a3-00617587775d','m³',1,1),
-(8,'循环水','7e159a34-b2e6-4fd3-ba76-897d134abe06','m³',1,1);
-
+(4,'4℃冷冻水','d2a3021a-4911-4611-856e-80133000f1d5','m³',1.000,1.000),
+(5,'7℃冷冻水','c1ad0696-e1ab-4e0c-a342-b194c0bc27e0','m³',1.000,1.000),
+(6,'蒸汽','ac91a5c4-4ae5-4a73-8e3f-044591f42eef','T',1.000,1.000),
+(7,'压缩空气','ff238e98-cd35-47c5-88a3-00617587775d','m³',1.000,1.000),
+(8,'循环水','7e159a34-b2e6-4fd3-ba76-897d134abe06','m³',1.000,1.000),
+(9, '热量','549f9cad-8db7-49d2-9473-95e37a3fc46a','KJ',1.000,1.000),
+(10, '冷量','05aa257b-3cf6-4f19-808d-92e7dbf52b16','KJ',1.000,1.000),
+(11, '中水','df6161b6-4a1b-46e7-b7c8-337b5b52d717','m³',1.000,1.000);
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -565,6 +567,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `max_hourly_value` DECIMAL(18, 3)  NOT NULL COMMENT 'Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
   `cost_center_id` BIGINT NOT NULL,
   `energy_item_id` BIGINT,
+  `parent_meter_id` BIGINT,
   `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
@@ -578,11 +581,11 @@ CREATE INDEX `tbl_meters_index_3` ON  `myems_system_db`.`tbl_meters`   (`energy_
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `parent_meter_id`, `location`, `description`)
 -- VALUES
--- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor1', 'meter1'),
--- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 'floor2', 'meter2'),
--- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 1, 'floor2', 'meter3');
+-- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, null, 'floor1', 'meter1'),
+-- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 999.99, 1, 1, 1, 'floor2', 'meter2'),
+-- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 999.99, 1, 1, 1, 'floor2', 'meter3');
 
 -- COMMIT;
 
@@ -653,8 +656,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_points` (
   `object_type` VARCHAR(32) NOT NULL,
   `units` VARCHAR(32) NOT NULL,
   `high_limit` DECIMAL(18, 3) NOT NULL,
-  `low_limit` DECIMAL(18, 3) NOT NULL,
-  `ratio` DECIMAL(18, 3) NULL,
+  `low_limit` DECIMAL(18, 3) DEFAULT 1.000 NOT NULL ,
+  `ratio` DECIMAL(18, 3) DEFAULT 1.000 NOT NULL,
   `is_trend` BOOL NOT NULL,
   `address` JSON NOT NULL,
   PRIMARY KEY (`id`));
