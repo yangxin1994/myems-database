@@ -13,7 +13,7 @@ Providing database schema and scripts for MyEMS.
 
 ### Installation
 
-Execute  the scripts in a MySQL client tool (MySQL Workbench, Navicate, DBaver)
+Execute  the scripts in a MySQL client tool (MySQL Workbench, Navicat, DBaver, phpMyAdmin, etc.)
 
 #### Change COLLATE for MySQL server before version 8.0
 ```
