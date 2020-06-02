@@ -896,6 +896,31 @@ CREATE INDEX `tbl_spaces_sensors_index_1` ON  `myems_system_db`.`tbl_spaces_sens
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_spaces_stores`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_stores` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_stores` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `store_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_spaces_stores_index_1` ON  `myems_system_db`.`tbl_spaces_stores`   (`space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces_stores`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_spaces_stores`
+-- (`id`, `space_id`, `store_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces_tenants`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_tenants` ;
@@ -1186,6 +1211,196 @@ VALUES
 (4, 15, 100000, 1000000000, 0.678);
 
 COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `address` VARCHAR(255) NOT NULL,
+  `latitude` DECIMAL(9, 6) NOT NULL,
+  `longitude` DECIMAL(9, 6) NOT NULL,
+  `area` DECIMAL(18, 3) NOT NULL,
+  `store_type_id` BIGINT NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
+  `contact_id` BIGINT NOT NULL,
+  `cost_center_id` BIGINT NOT NULL,
+  `description` VARCHAR(255),
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_stores_index_1` ON  `myems_system_db`.`tbl_stores`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_stores`
+(`id`, `name`, `uuid`, `address`, `latitude`, `longitude`, `area`, `store_type_id`, `is_input_counted`, `contact_id`, `cost_center_id`, `description`)
+VALUES
+    (1, '麦当劳(祈年大街得来速店)', 'd8a24322-4bab-4ba2-aedc-5d55a84c3db8', '北京市东城区东打磨厂街7号', 39.899493, 116.412041, 500.000, 1, true, 1, 1,  'MacDonald\'s');
+COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_store_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_store_types` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_store_types` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `simplified_code` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_store_types_index_1` ON  `myems_system_db`.`tbl_store_types`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_store_types`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_store_types`
+(`id`, `name`, `uuid`, `description`, `simplified_code`)
+VALUES
+(1, 'Restaurant', '494d7d5e-e139-4629-b957-99ea4caf0401', '餐饮', 'RS'),
+(2, 'Retail', '1f556579-9d5c-45ce-9bd8-f2dc1d033470', '零售', 'RT'),
+(3, 'Hotel', 'cae697aa-ceca-435d-91bf-492b46607eb0', '酒店', 'HT'),;
+
+
+COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` BIGINT NOT NULL,
+  `meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+  CREATE INDEX `tbl_stores_meters_index_1` ON  `myems_system_db`.`tbl_stores_meters`   (`store_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_stores_meters`
+-- (`id`, `store_id`, `meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores_offline_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores_offline_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` BIGINT NOT NULL,
+  `offline_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+  CREATE INDEX `tbl_stores_offline_meters_index_1` ON  `myems_system_db`.`tbl_stores_offline_meters`   (`store_id`);
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_stores_offline_meters`
+-- (`id`, `store_id`, `offline_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores_points` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores_points` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` BIGINT NOT NULL,
+  `point_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_stores_points_index_1` ON  `myems_system_db`.`tbl_stores_points`   (`store_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_stores_points`
+-- (`id`, store_id`, `point_id`)
+-- VALUES
+-- (1, 3, 2000001),
+-- (2, 3, 2000002),
+-- (3, 3, 2000003),
+-- (4, 3, 2000006);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores_sensors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores_sensors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` BIGINT NOT NULL,
+  `sensor_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_stores_sensors_index_1` ON  `myems_system_db`.`tbl_stores_sensors`   (`store_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_stores_sensors`
+-- (`id`, `store_id`, `sensor_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_stores_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_stores_virtual_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_stores_virtual_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `store_id` BIGINT NOT NULL,
+  `virtual_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_stores_virtual_meters_index_1` ON  `myems_system_db`.`tbl_stores_virtual_meters`   (`store_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_stores_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_stores_virtual_meters`
+-- (`id`, `store_id`, `virtual_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_tenants`
