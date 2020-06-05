@@ -538,6 +538,38 @@ CREATE INDEX `tbl_expressions_index_1` ON  `myems_system_db`.`tbl_expressions`  
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_gateways`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_gateways` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_gateways` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `connection` JSON NOT NULL,
+  `last_seen_datetime_utc` DATETIME NULL  COMMENT 'The last seen date time in UTC via PING, TELNET or Heatbeat',
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_gateways_index_1` ON  `myems_system_db`.`tbl_gateways`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_data_sources`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_data_sources`
+-- (`id`, `name`, `uuid`, `protocol`,  `connection`)
+-- VALUES
+-- (1, 'MyEMS Gateway 1', 'b3ace9d4-b63b-419b-818f-0f6d1d0603a4', 'modbus-tcp', '{"host":"10.111.212.191", "port":502}'),
+-- (2, '示例ModbusRTU数据源', 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"host":"10.111.212.44", "port":502}'),
+-- (3, '示例Bacnet/IP数据源', 'e2d5b30b-b554-4ebe-8ce7-f377ab380d19', 'bacnet-ip', '{"host":"10.111.212.200", "port":47808}'),
+-- (4, '示例S7数据源', '9eb0d705-d02a-43f8-9c62-7e5ef508b255', 's7', '{"host":"10.111.212.202", "port":102, "rack": 0, "slot": 2}'),
+-- (5, '示例ControlLogix数据源', 'd1dc9792-7861-4dd3-9b01-07511dae16c1', 'control-logix', '{"host":"10.111.212.203","port":44818,"processorslot":3}');
+-- (6, '示例OPU UA数据源', '56e1c642-8032-495b-af2e-18a77ca75e0f', 'opc-ua', '{"url":"opc.tcp://10.111.212.5:49320/OPCUA/SimulationServer/"}');
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_knowledge_files`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_knowledge_files` ;
@@ -1272,7 +1304,7 @@ INSERT INTO `myems_system_db`.`tbl_store_types`
 VALUES
 (1, 'Restaurant', '494d7d5e-e139-4629-b957-99ea4caf0401', '餐饮', 'RS'),
 (2, 'Retail', '1f556579-9d5c-45ce-9bd8-f2dc1d033470', '零售', 'RT'),
-(3, 'Hotel', 'cae697aa-ceca-435d-91bf-492b46607eb0', '酒店', 'HT'),;
+(3, 'Hotel', 'cae697aa-ceca-435d-91bf-492b46607eb0', '酒店', 'HT');
 
 
 COMMIT;
