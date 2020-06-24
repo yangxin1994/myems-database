@@ -90,12 +90,14 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_data_sources` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
+  `gateway_id` BIGINT NOT NULL,
   `protocol` VARCHAR(16) NOT NULL,
   `connection` JSON NOT NULL,
   `last_seen_datetime_utc` DATETIME NULL  COMMENT 'The last seen date time in UTC via PING or TELNET',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_data_sources_index_1` ON  `myems_system_db`.`tbl_data_sources`   (`name`);
-CREATE INDEX `tbl_data_sources_index_2` ON  `myems_system_db`.`tbl_data_sources`   (`protocol`);
+CREATE INDEX `tbl_data_sources_index_2` ON  `myems_system_db`.`tbl_data_sources`   (`gateway_id`);
+CREATE INDEX `tbl_data_sources_index_3` ON  `myems_system_db`.`tbl_data_sources`   (`protocol`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_data_sources`
@@ -104,14 +106,14 @@ CREATE INDEX `tbl_data_sources_index_2` ON  `myems_system_db`.`tbl_data_sources`
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_data_sources`
--- (`id`, `name`, `uuid`, `protocol`,  `connection`)
+-- (`id`, `name`, `uuid`,`gateway_id`, `protocol`,  `connection`)
 -- VALUES
--- (1, '示例ModbusTCP数据源', 'b3ace9d4-b63b-419b-818f-0f6d1d0603a4', 'modbus-tcp', '{"host":"10.111.212.191", "port":502}'),
--- (2, '示例ModbusRTU数据源', 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"host":"10.111.212.44", "port":502}'),
--- (3, '示例Bacnet/IP数据源', 'e2d5b30b-b554-4ebe-8ce7-f377ab380d19', 'bacnet-ip', '{"host":"10.111.212.200", "port":47808}'),
--- (4, '示例S7数据源', '9eb0d705-d02a-43f8-9c62-7e5ef508b255', 's7', '{"host":"10.111.212.202", "port":102, "rack": 0, "slot": 2}'),
--- (5, '示例ControlLogix数据源', 'd1dc9792-7861-4dd3-9b01-07511dae16c1', 'control-logix', '{"host":"10.111.212.203","port":44818,"processorslot":3}');
--- (6, '示例OPU UA数据源', '56e1c642-8032-495b-af2e-18a77ca75e0f', 'opc-ua', '{"url":"opc.tcp://10.111.212.5:49320/OPCUA/SimulationServer/"}');
+-- (1, '示例ModbusTCP数据源', 1, 'b3ace9d4-b63b-419b-818f-0f6d1d0603a4', 'modbus-tcp', '{"host":"10.111.212.191", "port":502}'),
+-- (2, '示例ModbusRTU数据源', 1, 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"host":"10.111.212.44", "port":502}'),
+-- (3, '示例Bacnet/IP数据源', 1, 'e2d5b30b-b554-4ebe-8ce7-f377ab380d19', 'bacnet-ip', '{"host":"10.111.212.200", "port":47808}'),
+-- (4, '示例S7数据源', 1, '9eb0d705-d02a-43f8-9c62-7e5ef508b255', 's7', '{"host":"10.111.212.202", "port":102, "rack": 0, "slot": 2}'),
+-- (5, '示例ControlLogix数据源', 1, 'd1dc9792-7861-4dd3-9b01-07511dae16c1', 'control-logix', '{"host":"10.111.212.203","port":44818,"processorslot":3}');
+-- (6, '示例OPU UA数据源', 1, '56e1c642-8032-495b-af2e-18a77ca75e0f', 'opc-ua', '{"url":"opc.tcp://10.111.212.5:49320/OPCUA/SimulationServer/"}');
 
 -- COMMIT;
 
@@ -546,28 +548,24 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_gateways` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `connection` JSON NOT NULL,
+  `token` CHAR(36) NOT NULL,
   `last_seen_datetime_utc` DATETIME NULL  COMMENT 'The last seen date time in UTC via PING, TELNET or Heatbeat',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_gateways_index_1` ON  `myems_system_db`.`tbl_gateways`   (`name`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Example Data for table `myems_system_db`.`tbl_data_sources`
+-- Example Data for table `myems_system_db`.`tbl_gateways`
 -- ---------------------------------------------------------------------------------------------------------------------
--- START TRANSACTION;
--- USE `myems_system_db`;
+START TRANSACTION;
+USE `myems_system_db`;
 
--- INSERT INTO `myems_system_db`.`tbl_data_sources`
--- (`id`, `name`, `uuid`, `protocol`,  `connection`)
--- VALUES
--- (1, 'MyEMS Gateway 1', 'b3ace9d4-b63b-419b-818f-0f6d1d0603a4', 'modbus-tcp', '{"host":"10.111.212.191", "port":502}'),
--- (2, '示例ModbusRTU数据源', 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"host":"10.111.212.44", "port":502}'),
--- (3, '示例Bacnet/IP数据源', 'e2d5b30b-b554-4ebe-8ce7-f377ab380d19', 'bacnet-ip', '{"host":"10.111.212.200", "port":47808}'),
--- (4, '示例S7数据源', '9eb0d705-d02a-43f8-9c62-7e5ef508b255', 's7', '{"host":"10.111.212.202", "port":102, "rack": 0, "slot": 2}'),
--- (5, '示例ControlLogix数据源', 'd1dc9792-7861-4dd3-9b01-07511dae16c1', 'control-logix', '{"host":"10.111.212.203","port":44818,"processorslot":3}');
--- (6, '示例OPU UA数据源', '56e1c642-8032-495b-af2e-18a77ca75e0f', 'opc-ua', '{"url":"opc.tcp://10.111.212.5:49320/OPCUA/SimulationServer/"}');
+INSERT INTO `myems_system_db`.`tbl_gateways`
+(`id`, `name`, `uuid`, `token`,  `last_seen_datetime_utc`)
+VALUES
+(1, 'MyEMS Gateway 1', 'dc681934-5053-4660-98ed-266c54227231', '983427af-1c35-42ba-8b4d-288675550225', null),
+(2, 'MyEMS Gateway 2', '8f75c0ab-9296-49c7-9058-8139febd0c31', 'd3860971-e6e0-4c98-9eba-5492869c5b19', null);
 
--- COMMIT;
+COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_knowledge_files`
