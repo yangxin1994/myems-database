@@ -109,12 +109,12 @@ CREATE INDEX `tbl_data_sources_index_3` ON  `myems_system_db`.`tbl_data_sources`
 -- (`id`, `name`, `uuid`,`gateway_id`, `protocol`,  `connection`)
 -- VALUES
 -- (1, '示例ModbusTCP数据源', 1, 'b3ace9d4-b63b-419b-818f-0f6d1d0603a4', 'modbus-tcp', '{"host":"10.111.212.191", "port":502}'),
--- (2, '示例ModbusRTU数据源', 1, 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"host":"10.111.212.44", "port":502}'),
+-- (2, '示例ModbusRTU数据源', 1, 'b903f0af-9115-448c-9d46-8caf5f9995f3', 'modbus-tru', '{"port": "/dev/ttyUSB0","slaveaddress": 1, "baudrate": 9600,"bytesize": 8,"parity": "N","stopbits": 1,"timeout": 0.05,"mode": "rtu"}''),
 -- (3, '示例Bacnet/IP数据源', 1, 'e2d5b30b-b554-4ebe-8ce7-f377ab380d19', 'bacnet-ip', '{"host":"10.111.212.200", "port":47808}'),
 -- (4, '示例S7数据源', 1, '9eb0d705-d02a-43f8-9c62-7e5ef508b255', 's7', '{"host":"10.111.212.202", "port":102, "rack": 0, "slot": 2}'),
 -- (5, '示例ControlLogix数据源', 1, 'd1dc9792-7861-4dd3-9b01-07511dae16c1', 'control-logix', '{"host":"10.111.212.203","port":44818,"processorslot":3}');
 -- (6, '示例OPU UA数据源', 1, '56e1c642-8032-495b-af2e-18a77ca75e0f', 'opc-ua', '{"url":"opc.tcp://10.111.212.5:49320/OPCUA/SimulationServer/"}');
-
+-- (7, '示例天气数据源', 1, '9bff8e95-c7c9-4002-b040-08a96ae196b5', 'weather', '{"base_url":"WEATHER_API_URL", "location":"beijing", "key":"APPKEY"}');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
