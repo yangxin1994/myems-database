@@ -984,7 +984,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors` (
   `area` DECIMAL(18, 3) NOT NULL,
   `timezone_id` BIGINT NOT NULL,
   `is_input_counted` BOOL NOT NULL,
-  `is_output_counted` BOOL NOT NULL,
   `contact_id` BIGINT,
   `cost_center_id` BIGINT,
   `location` VARCHAR(255),
@@ -999,9 +998,9 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_shopfloors`
-(`id`, `name`, `uuid` , `area`, `timezone_id`, `contact_id`, `is_input_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+(`id`, `name`, `uuid` , `area`, `timezone_id`, `contact_id`, `is_input_counted`,  `cost_center_id`, `location`, `description`)
 VALUES
-    (1, 'MyEMS Shopfloor', 'd03837fd-9d30-44fe-9443-154f7c7e15f1',  99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project');
+    (1, 'MyEMS Shopfloor', 'd03837fd-9d30-44fe-9443-154f7c7e15f1',  99999.999, 56, 1, true, 1, 'MyEMS Compus', 'MyEMS Project');
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
