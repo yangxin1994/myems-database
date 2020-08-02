@@ -7,6 +7,188 @@ DROP DATABASE IF EXISTS `myems_system_db` ;
 CREATE DATABASE IF NOT EXISTS `myems_system_db` ;
 USE `myems_system_db` ;
 
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
+  `is_output_counted` BOOL NOT NULL,
+  `cost_center_id` BIGINT NOT NULL,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipments_index_1` ON  `myems_system_db`.`tbl_combined_equipments`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments`
+-- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`, `location` , `description` )
+-- VALUES
+-- (1, '组合式设备1', '48aab70f-2e32-4518-9986-a6b7395acf58', true, false, 1, 'location', 'description'),
+-- (2, '组合式设备2', 'c235e68c-e1be-4d7a-84e7-976c83ff6e44', true, false, 1, 'location', 'description');
+
+-- COMMIT;
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments_equipments` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_equipments` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `combined_equipment_id` BIGINT NOT NULL,
+  `equipment_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipments_equipments_index_1` ON  `myems_system_db`.`tbl_combined_equipments_equipments`   (`combined_equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments_equipments`
+-- (`id`, `combined_equipment_id`, `equipment_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `combined_equipment_id` BIGINT NOT NULL,
+  `meter_id` BIGINT NOT NULL,
+  `is_output` BOOL NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipments_meters_index_1` ON  `myems_system_db`.`tbl_combined_equipments_meters`   (`combined_equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments_meters`
+-- (`id`, `combined_equipment_id`, `meter_id`, `is_output`)
+-- VALUES
+-- (1, 1, 1, false);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments_offline_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_offline_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `combined_equipment_id` BIGINT NOT NULL,
+  `offline_meter_id` BIGINT NOT NULL,
+  `is_output` BOOL NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipments_offline_meters_index_1` ON  `myems_system_db`.`tbl_combined_equipments_offline_meters`   (`combined_equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments_offline_meters`
+-- (`id`, `combined_equipment_id`, `offline_meter_id`, `is_output`)
+-- VALUES
+-- (1, 1, 1, false);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments_parameters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_parameters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `combined_equipment_id` BIGINT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
+  `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
+  `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
+  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_combined_equipments_parameters`   (`combined_equipment_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments_parameters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+--
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments_parameters`
+-- (`id`, `combined_equipment_id`, `name`, `parameter_type`, `constant`, `point_id`, `numerator_meter_uuid`, `denominator_meter_uuid`)
+-- VALUES
+-- (1, 1, 'serial number', 'constant', 'bfa8b106', NULL, NULL, NULL),
+-- (2, 1, 'manufacturer', 'constant', 'York', NULL, NULL, NULL),
+-- (3, 1, 'maintainer', 'constant', 'Johnson Controls', NULL, NULL, NULL),
+-- (4, 1, 'use life start', 'constant', '2016-01-01', NULL, NULL, NULL),
+-- (5, 1, 'use life end', 'constant', '2025-12-31', NULL, NULL, NULL),
+-- (6, 1, 'model number', 'constant', 'CH01', NULL, NULL, NULL),
+-- (7, 1, 'nominal cooling capacity', 'constant', '90.000 kW', NULL, NULL, NULL),
+-- (8, 1, 'nominal cooling input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (9, 1, 'nominal cooling cop', 'constant', '5', NULL, NULL, NULL),
+-- (10, 1, 'nominal cooling operating current', 'constant', '120.000 A', NULL, NULL, NULL),
+-- (11, 1, 'rated input power', 'constant', '100.000 kW', NULL, NULL, NULL),
+-- (12, 1, 'nominal chilled water flow rate', 'constant', '30 m2/h', NULL, NULL, NULL),
+-- (13, 1, 'nominal cooling water flow_rate', 'constant', '50 m2/h', NULL, NULL, NULL),
+-- (14, 1, 'status', 'point', NULL, 1, NULL, NULL),
+-- (15, 1, 'inlet chilled water temperature', 'point', NULL, 2, NULL, NULL),
+-- (16, 1, 'chilled_water instantaneous flow rate', 'point', NULL, 3, NULL, NULL),
+-- (17, 1, 'instantaneous power', 'point', NULL, 4, NULL, NULL),
+-- (18, 1, 'COP', 'fraction', NULL, NULL, 'a4e0dbf0-528a-4cbb-88cc-563527900d40', '89ff5118-d0c2-4dd8-8098-a8698189b2ea');
+--
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_combined_equipments_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_combined_equipments_virtual_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_virtual_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `combined_equipment_id` BIGINT NOT NULL,
+  `virtual_meter_id` BIGINT NOT NULL,
+  `is_output` BOOL NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_combined_equipments_virtual_meters_index_1` ON  `myems_system_db`.`tbl_combined_equipments_virtual_meters`   (`combined_equipment_id`);
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_combined_equipments_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_combined_equipments_virtual_meters`
+-- (`id`, `combined_equipment_id`, `virtual_meter_id`, `is_output`)
+-- VALUES
+-- (1, 1, 1, false);
+
+-- COMMIT;
+
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_contacts`
 -- ---------------------------------------------------------------------------------------------------------------------
