@@ -1010,6 +1010,31 @@ VALUES
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_spaces_combined_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_combined_equipments` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_combined_equipments` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `combined_equipment_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_spaces_combined_equipments_index_1` ON  `myems_system_db`.`tbl_spaces_combined_equipments`   (`space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces_combined_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_spaces_combined_equipments`
+-- (`id`, `space_id`, `combined_equipment_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces_equipments`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_equipments` ;
