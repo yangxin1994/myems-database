@@ -973,6 +973,38 @@ CREATE INDEX `tbl_sensors_points_index_1` ON  `myems_system_db`.`tbl_sensors_poi
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `uuid` CHAR(36) NOT NULL,
+  `area` DECIMAL(18, 3) NOT NULL,
+  `timezone_id` BIGINT NOT NULL,
+  `is_input_counted` BOOL NOT NULL,
+  `is_output_counted` BOOL NOT NULL,
+  `contact_id` BIGINT,
+  `cost_center_id` BIGINT,
+  `location` VARCHAR(255),
+  `description` VARCHAR(255),
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_shopfloors`   (`name`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors`
+-- ---------------------------------------------------------------------------------------------------------------------
+START TRANSACTION;
+USE `myems_system_db`;
+
+INSERT INTO `myems_system_db`.`tbl_shopfloors`
+(`id`, `name`, `uuid` , `area`, `timezone_id`, `contact_id`, `is_input_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+VALUES
+    (1, 'MyEMS Shopfloor', 'd03837fd-9d30-44fe-9443-154f7c7e15f1',  99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project');
+COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces` ;
@@ -1129,6 +1161,31 @@ CREATE INDEX `tbl_spaces_sensors_index_1` ON  `myems_system_db`.`tbl_spaces_sens
 
 -- INSERT INTO `myems_system_db`.`tbl_spaces_sensors`
 -- (`id`, `space_id`, `sensor_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_spaces_shopfloors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_spaces_shopfloors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces_shopfloors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `space_id` BIGINT NOT NULL,
+  `shopfloor_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_spaces_sensors_index_1` ON  `myems_system_db`.`tbl_spaces_shopfloors`   (`space_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_spaces_shopfloors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_spaces_shopfloors`
+-- (`id`, `space_id`, `shopfloor_id`)
 -- VALUES
 -- (1, 1, 1);
 
