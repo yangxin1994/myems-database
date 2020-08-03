@@ -989,7 +989,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors` (
   `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
-CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_shopfloors`   (`name`);
+CREATE INDEX `tbl_shopfloors_index_1` ON  `myems_system_db`.`tbl_shopfloors`   (`name`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Example Data for table `myems_system_db`.`tbl_shopfloors`
@@ -1002,6 +1002,161 @@ INSERT INTO `myems_system_db`.`tbl_shopfloors`
 VALUES
     (1, 'MyEMS Shopfloor', 'd03837fd-9d30-44fe-9443-154f7c7e15f1',  99999.999, 56, 1, true, 1, 'MyEMS Compus', 'MyEMS Project');
 COMMIT;
+
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_equipments` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_equipments` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `equipment_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_equipments_index_1` ON  `myems_system_db`.`tbl_shopfloors_equipments`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_equipments`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_equipments`
+-- (`id`, `shopfloor_id`, `equipment_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_meters_index_1` ON  `myems_system_db`.`tbl_shopfloors_meters`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_meters`
+-- (`id`, `shopfloor_id`, `meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_offline_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_offline_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `offline_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_offline_meters_index_1` ON  `myems_system_db`.`tbl_shopfloors_offline_meters`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_offline_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_offline_meters`
+-- (`id`, `shopfloor_id`, `offline_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_sensors` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_sensors` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `sensor_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_sensors_index_1` ON  `myems_system_db`.`tbl_shopfloors_sensors`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_sensors`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_sensors`
+-- (`id`, `shopfloor_id`, `sensor_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_virtual_meters` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_virtual_meters` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `virtual_meter_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_virtual_meters_index_1` ON  `myems_system_db`.`tbl_shopfloors_virtual_meters`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_virtual_meters`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_virtual_meters`
+-- (`id`, `shopfloor_id`, `virtual_meter_id`)
+-- VALUES
+-- (1, 1, 1);
+
+-- COMMIT;
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_system_db`.`tbl_shopfloors_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_system_db`.`tbl_shopfloors_points` ;
+
+CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_shopfloors_points` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `point_id` BIGINT NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloors_points_index_1` ON  `myems_system_db`.`tbl_shopfloors_points`   (`shopfloor_id`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Example Data for table `myems_system_db`.`tbl_shopfloors_points`
+-- ---------------------------------------------------------------------------------------------------------------------
+-- START TRANSACTION;
+-- USE `myems_system_db`;
+
+-- INSERT INTO `myems_system_db`.`tbl_shopfloors_points`
+-- (`id`, `shopfloor_id`, `point_id`)
+-- VALUES
+-- (1, 3, 2000001),
+-- (2, 3, 2000002),
+-- (3, 3, 2000003),
+-- (4, 3, 2000006);
+
+-- COMMIT;
+
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_system_db`.`tbl_spaces`
@@ -1284,7 +1439,7 @@ CREATE INDEX `tbl_spaces_points_index_1` ON  `myems_system_db`.`tbl_spaces_point
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_spaces_points`
--- (`id`, space_id`, `point_id`)
+-- (`id`, `space_id`, `point_id`)
 -- VALUES
 -- (1, 3, 2000001),
 -- (2, 3, 2000002),
