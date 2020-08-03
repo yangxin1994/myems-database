@@ -8,7 +8,7 @@ CREATE DATABASE IF NOT EXISTS `myems_billing_db` ;
 USE `myems_billing_db` ;
 
 -- ---------------------------------------------------------------------------------------------------------------------
--- Table `myems_energy_db`.`tbl_combined_equipment_input_category_hourly`
+-- Table `myems_billing_db`.`tbl_combined_equipment_input_category_hourly`
 -- ---------------------------------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS `myems_billing_db`.`tbl_combined_equipment_input_category_hourly` ;
 
@@ -144,6 +144,34 @@ CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_offline_meter_hourly` (
   `actual_value` DECIMAL(18, 3) NOT NULL,
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meter_hourly_index_1` ON  `myems_billing_db`.`tbl_offline_meter_hourly`   (`offline_meter_id`, `start_datetime_utc`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_billing_db`.`tbl_shopfloor_input_category_hourly`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_billing_db`.`tbl_shopfloor_input_category_hourly` ;
+
+CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_shopfloor_input_category_hourly` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `energy_category_id` BIGINT NOT NULL,
+  `start_datetime_utc` DATETIME NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloor_input_category_hourly_index_1` ON  `myems_billing_db`.`tbl_shopfloor_input_category_hourly`   (`shopfloor_id`, `energy_category_id`, `start_datetime_utc`);
+
+-- ---------------------------------------------------------------------------------------------------------------------
+-- Table `myems_billing_db`.`tbl_shopfloor_input_item_hourly`
+-- ---------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `myems_billing_db`.`tbl_shopfloor_input_item_hourly` ;
+
+CREATE TABLE IF NOT EXISTS `myems_billing_db`.`tbl_shopfloor_input_item_hourly` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `shopfloor_id` BIGINT NOT NULL,
+  `energy_item_id` BIGINT NOT NULL,
+  `start_datetime_utc` DATETIME NOT NULL,
+  `actual_value` DECIMAL(18, 3) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE INDEX `tbl_shopfloor_input_item_hourly_index_1` ON  `myems_billing_db`.`tbl_shopfloor_input_item_hourly`   (`shopfloor_id`, `energy_item_id`, `start_datetime_utc`);
 
 -- ---------------------------------------------------------------------------------------------------------------------
 -- Table `myems_billing_db`.`tbl_space_input_category_hourly`
