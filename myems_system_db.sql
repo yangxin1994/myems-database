@@ -874,6 +874,7 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_points` (
   `ratio` DECIMAL(18, 3) DEFAULT 1.000 NOT NULL,
   `is_trend` BOOL NOT NULL,
   `address` JSON NOT NULL,
+  `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_points_index_1` ON  `myems_system_db`.`tbl_points`   (`name`);
 CREATE INDEX `tbl_points_index_2` ON  `myems_system_db`.`tbl_points`   (`data_source_id`);
@@ -890,36 +891,36 @@ CREATE INDEX `tbl_points_index_3` ON  `myems_system_db`.`tbl_points`   (`id`, `o
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_points`
--- (`id`, `name`, `data_source_id`, `object_type`, `units`, `low_limit`, `high_limit`, `ratio`, `is_trend`, `address`)
+-- (`id`, `name`, `data_source_id`, `object_type`, `units`, `low_limit`, `high_limit`, `ratio`, `is_trend`, `address`, `description` )
 -- VALUES
 -- (1, 'Active Energy Import Tariff 1', 1, 'ENERGY_VALUE', 'Wh', 0, 99999999999, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":801, \"number_of_registers\":4, \"format\":\"=d\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":801, \"number_of_registers\":4, \"format\":\"=d\"}', null),
 
 -- (2, 'Working hours counter', 1, 'ANALOG_VALUE',  'S', 0, 999999999, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":209, \"number_of_registers\":2, \"format\":\"=L\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":209, \"number_of_registers\":2, \"format\":\"=L\"}', null),
 
 -- (3, 'Current a', 1, 'ANALOG_VALUE',  'A', 0, 5, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":13, \"number_of_registers\":2, \"format\":\"=f\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":13, \"number_of_registers\":2, \"format\":\"=f\"}', null),
 
 -- (4, 'Active Power a', 1, 'ANALOG_VALUE',  'W', 0, 3450, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":25, \"number_of_registers\":2, \"format\":\"=f\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":25, \"number_of_registers\":2, \"format\":\"=f\"}', null),
 
 -- (5, 'Power Factor a', 1, 'ANALOG_VALUE',  'W', 0, 1, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":37, \"number_of_registers\":2, \"format\":\"=f\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":37, \"number_of_registers\":2, \"format\":\"=f\"}', null),
 
 -- (6, '示例数据点6', 2, 'ENERGY_VALUE',  'Wh', 0, 99999999999, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":40001, \"number_of_registers\":2, \"format\":\"=f\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":40001, \"number_of_registers\":2, \"format\":\"=f\"}', null),
 
 -- (7, '示例数据点7', 2, 'ANALOG_VALUE',  'V', 0, 690, null, true,
---   '{\"slave_id\":1, \"function_code\":3, \"offset\":40002, \"number_of_registers\":2, \"format\":\"=f\"}'),
+--   '{\"slave_id\":1, \"function_code\":3, \"offset\":40002, \"number_of_registers\":2, \"format\":\"=f\"}', null),
 
 -- (8, 'BACnet示例数据点1', 3, 'ANALOG_VALUE',  'V', 0, 690, 1.2, true,
---   '{\"object_type\":\"analogValue\", \"object_id\":3004860, \"property_name\":\"presentValue\", \"property_array_index\":null}'),
+--   '{\"object_type\":\"analogValue\", \"object_id\":3004860, \"property_name\":\"presentValue\", \"property_array_index\":null}', null),
 -- BACnet Object Type
 -- analogValue, analogInput, analogOutput, binaryValue, binaryInput, binaryOutput
 
 -- (9, 'S7示例数据点1', 4, 'ANALOG_VALUE',  'kWh', 0, 99999999999, null, true,
---   '{\"area\":\"DB\", \"db_number\":700, \"start\":8, \"size\":4');
+--   '{\"area\":\"DB\", \"db_number\":700, \"start\":8, \"size\":4', null);
 -- # S7 Area
 -- 'PE', 'PA', 'MK', 'DB', 'CT', 'TM'
 
