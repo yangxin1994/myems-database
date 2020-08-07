@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments` (
   `is_input_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT NOT NULL,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_combined_equipments_index_1` ON  `myems_system_db`.`tbl_combined_equipments`   (`name`);
@@ -32,10 +31,10 @@ CREATE INDEX `tbl_combined_equipments_index_1` ON  `myems_system_db`.`tbl_combin
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_combined_equipments`
--- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`, `location` , `description` )
+-- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`, `description` )
 -- VALUES
--- (1, '组合式设备1', '48aab70f-2e32-4518-9986-a6b7395acf58', true, false, 1, 'location', 'description'),
--- (2, '组合式设备2', 'c235e68c-e1be-4d7a-84e7-976c83ff6e44', true, false, 1, 'location', 'description');
+-- (1, '组合式设备1', '48aab70f-2e32-4518-9986-a6b7395acf58', true, false, 1, 'description'),
+-- (2, '组合式设备2', 'c235e68c-e1be-4d7a-84e7-976c83ff6e44', true, false, 1,  'description');
 
 -- COMMIT;
 
@@ -552,7 +551,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments` (
   `is_input_counted` BOOL NOT NULL,
   `is_output_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT NOT NULL,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (`name`);
@@ -564,10 +562,10 @@ CREATE INDEX `tbl_equipments_index_1` ON  `myems_system_db`.`tbl_equipments`   (
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_equipments`
--- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`, `location` , `description` )
+-- (`id`, `name`, `uuid`,  `is_input_counted`, `is_output_counted`, `cost_center_id`,  `description` )
 -- VALUES
--- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', true, false, 1, 'location', 'description'),
--- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', true, false, 1, 'location', 'description');
+-- (1, '设备1', 'bfa8b106-89a1-49ca-9b2b-a481ac41a873', true, false, 1, 'description'),
+-- (2, '设备2', 'ad5798ec-d827-43d9-bf08-fc7516f9c4c8', true, false, 1, 'description');
 
 -- COMMIT;
 
@@ -781,7 +779,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_meters` (
   `cost_center_id` BIGINT NOT NULL,
   `energy_item_id` BIGINT,
   `parent_meter_id` BIGINT,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_meters_index_1` ON  `myems_system_db`.`tbl_meters`   (`name`);
@@ -794,11 +791,11 @@ CREATE INDEX `tbl_meters_index_3` ON  `myems_system_db`.`tbl_meters`   (`energy_
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `parent_meter_id`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `parent_meter_id`, `description`)
 -- VALUES
--- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 0.000, 999.999, 1, 1, null, 'floor1', 'meter1'),
--- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 0.000, 999.999, 1, 1, 1, 'floor2', 'meter2'),
--- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 0.000, 999.999, 1, 1, 1, 'floor2', 'meter3');
+-- (1, '示例表1', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 0.000, 999.999, 1, 1, null, 'meter1'),
+-- (2, '示例表2', '5ca47bc5-22c2-47fc-b906-33222191ea40', 1, true, 0.000, 999.999, 1, 1, 1,  'meter2'),
+-- (3, '示例表3', '6db58cd6-33d3-58ed-a095-22333202fb51', 1, true, 0.000, 999.999, 1, 1, 1,  'meter3');
 
 -- COMMIT;
 
@@ -840,7 +837,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_offline_meters` (
   `hourly_high_limit` DECIMAL(18, 3)  NOT NULL COMMENT 'Inclusive. Maximum energy consumption per hour, Rated total active Power, Rated Flow, etc.',
   `cost_center_id` BIGINT NOT NULL,
   `energy_item_id` BIGINT,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_offline_meters_index_1` ON  `myems_system_db`.`tbl_offline_meters`   (`name`);
@@ -853,9 +849,9 @@ CREATE INDEX `tbl_offline_meters_index_3` ON  `myems_system_db`.`tbl_offline_met
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_offline_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `max_hourly_value`, `cost_center_id`, `energy_item_id`, `description`)
 -- VALUES
--- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true, 999.99, 1, 1, 'floor1', 'offlinemeter1');
+-- (1, '示例离线表', '62f473e0-1a35-41f3-9c30-8110d75d65bb', 1, true, 999.99, 1, 1, 'offlinemeter1');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -935,7 +931,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_sensors` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `uuid` CHAR(36) NOT NULL,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_sensors_index_1` ON  `myems_system_db`.`tbl_sensors`   (`name`);
@@ -946,9 +941,9 @@ CREATE INDEX `tbl_sensors_index_1` ON  `myems_system_db`.`tbl_sensors`   (`name`
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_sensors`
--- (`id`, `name`, `uuid`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `description`)
 -- VALUES
--- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511', 'sensor location', 'sensor description');
+-- (1, '示例传感器', 'ba450606-6f39-41e0-8caf-75b528635511', 'sensor description');
 -- COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -1173,7 +1168,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_spaces` (
   `is_output_counted` BOOL NOT NULL,
   `contact_id` BIGINT,
   `cost_center_id` BIGINT,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_spaces_index_1` ON  `myems_system_db`.`tbl_spaces`   (`name`);
@@ -1186,12 +1180,12 @@ START TRANSACTION;
 USE `myems_system_db`;
 
 INSERT INTO `myems_system_db`.`tbl_spaces`
-(`id`, `name`, `uuid`, `parent_space_id`, `area`, `timezone_id`, `contact_id`, `is_input_counted`, `is_output_counted`, `cost_center_id`, `location`, `description`)
+(`id`, `name`, `uuid`, `parent_space_id`, `area`, `timezone_id`, `contact_id`, `is_input_counted`, `is_output_counted`, `cost_center_id`, `description`)
 VALUES
     -- DO NOT deleted the record which ID is 1. It's the root space.
-    (1, 'MyEMS Headquarter', '9dfb7cff-f19f-4a1e-8c79-3adf6425bfd9', NULL, 99999.999, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
-    (2, 'MyEMS Building #1', '8f25b33b-db93-49b3-b0f8-b01e0c19df29', 1, 88888.888, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project'),
-    (3, 'MyEMS Building #2', '195d7ea8-17b4-4e9c-bb37-546428155438', 1, 66666.666, 56, 1, true, true, 1, 'MyEMS Compus', 'MyEMS Project');
+    (1, 'MyEMS Headquarter', '9dfb7cff-f19f-4a1e-8c79-3adf6425bfd9', NULL, 99999.999, 56, 1, true, true, 1,  'MyEMS Project'),
+    (2, 'MyEMS Building #1', '8f25b33b-db93-49b3-b0f8-b01e0c19df29', 1, 88888.888, 56, 1, true, true, 1,  'MyEMS Project'),
+    (3, 'MyEMS Building #2', '195d7ea8-17b4-4e9c-bb37-546428155438', 1, 66666.666, 56, 1, true, true, 1, 'MyEMS Project');
 COMMIT;
 
 -- ---------------------------------------------------------------------------------------------------------------------
@@ -2183,7 +2177,6 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_virtual_meters` (
   `is_counted` BOOL NOT NULL,
   `cost_center_id` BIGINT NOT NULL,
   `energy_item_id` BIGINT,
-  `location` VARCHAR(255),
   `description` VARCHAR(255),
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_virtual_meters_index_1` ON  `myems_system_db`.`tbl_virtual_meters`   (`name`);
@@ -2197,9 +2190,9 @@ CREATE INDEX `tbl_virtual_meters_index_3` ON  `myems_system_db`.`tbl_virtual_met
 -- USE `myems_system_db`;
 
 -- INSERT INTO `myems_system_db`.`tbl_virtual_meters`
--- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `cost_center_id`, `energy_item_id`, `location`, `description`)
+-- (`id`, `name`, `uuid`, `energy_category_id`, `is_counted`, `cost_center_id`, `energy_item_id`, `description`)
 -- VALUES
--- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true, 1, 1, 'virtual location', `virtual description`);
+-- (1, '示例虚拟表', '3fff2cfb-f755-44c8-a919-6135205a8573', 1, true, 1, 1, `virtual description`);
 
 -- COMMIT;
 
