@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_combined_equipments_parameters
   `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
   `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
   `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
-  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
-  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `numerator_meter_uuid` CHAR(36) COMMENT 'the number above the line in a common fraction. NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `denominator_meter_uuid` CHAR(36) COMMENT 'the number below the line in a common fraction. NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_combined_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_combined_equipments_parameters`   (`combined_equipment_id`);
 
@@ -634,8 +634,8 @@ CREATE TABLE IF NOT EXISTS `myems_system_db`.`tbl_equipments_parameters` (
   `parameter_type` VARCHAR(255)  COMMENT 'constant, point, fraction',
   `constant` VARCHAR(255) COMMENT 'NULL if type is not constant else string ',
   `point_id` BIGINT COMMENT 'NULL if type is not point else point ID ',
-  `numerator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
-  `denominator_meter_uuid` CHAR(36) COMMENT 'NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `numerator_meter_uuid` CHAR(36) COMMENT 'the number above the line in a common fraction. NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
+  `denominator_meter_uuid` CHAR(36) COMMENT 'the number below the line in a common fraction. NULL if type is not fraction else may be meter uuid, offline meter uuid or virtual meter uuid',
   PRIMARY KEY (`id`));
 CREATE INDEX `tbl_equipment_parameters_index_1` ON  `myems_system_db`.`tbl_equipments_parameters`   (`equipment_id`);
 
