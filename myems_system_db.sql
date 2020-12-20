@@ -1909,15 +1909,15 @@ USE `myems_system_db`;
 INSERT INTO `myems_system_db`.`tbl_tenant_types`
 (`id`, `name`, `uuid`, `description`, `simplified_code`)
 VALUES
-(1, 'Office', '83fffba1-9e22-4397-a93a-3742772c3753', '办公', 'OF'),
-(2, 'Retail', 'ad95ed16-1c57-49a9-a85e-71e389393089', '零售', 'RT'),
-(3, 'Carpark', '1dc21e83-4333-40f8-9e25-ea049becba37', '停车场', 'CA'),
-(4, 'Hotel', '4208a60d-d8e6-4fe5-8cea-a55109e9b397', '酒店', 'HT'),
-(5, 'Residential', 'fc4ae534-544a-4a22-b83b-9f4aa99494aa', '住宅', 'RS'),
-(6, 'Service Apartment', '6d1dca30-1cbe-463d-8a78-cdd5e0f8ac8b', '服务式公寓', 'SA'),
-(7, 'Development (Complex)', '2078e1c0-3936-4ae7-9253-08e0aa1d84b6', '整个物业项目', 'DV'),
-(8, 'Plant 1', 'b2a580a3-edc9-4838-ae1d-7b7265860a9a', '能源站 1', 'P1'),
-(9, 'GasFood', '55bbcba7-d8a0-44a0-9a9f-2f085e3cb044', '燃气餐饮租户', 'GF');
+(1, '餐饮租户', '83fffba1-9e22-4397-a93a-3742772c3753', 'Food and Beverage', 'FNB'),
+(2, '燃气餐饮租户', 'ad95ed16-1c57-49a9-a85e-71e389393089', 'Food and Beverage (Gas)', 'FNBGas'),
+(3, '电餐饮租户', '1dc21e83-4333-40f8-9e25-ea049becba37', 'Food and Beverage (Electrical)', 'FNBElec'),
+(4, '高照度租户', '4208a60d-d8e6-4fe5-8cea-a55109e9b397', 'High Illuminance Tenant', 'HighIllu'),
+(5, '主力租户', 'fc4ae534-544a-4a22-b83b-9f4aa99494aa', 'Anchor Tenant', 'ANCH'),
+(6, '普通商业租户', '6d1dca30-1cbe-463d-8a78-cdd5e0f8ac8b', 'Normal Tenant', 'Normal'),
+(7, '其他商业租户', '2078e1c0-3936-4ae7-9253-08e0aa1d84b6', 'Other Retail Tenants', 'Other'),
+(8, '整层办公租户', 'b2a580a3-edc9-4838-ae1d-7b7265860a9a', 'Whole Floor Office Tenant', 'WhFlr'),
+(9, '非整层办公租户', '55bbcba7-d8a0-44a0-9a9f-2f085e3cb044', 'None-Whole Floor Office Tenant', 'NonWhFlr');
 
 
 COMMIT;
